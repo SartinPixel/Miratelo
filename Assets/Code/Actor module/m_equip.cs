@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    /*
-    public class m_arm : state_box
+    public class m_equip : module
     {
         List <Weapon> weapons;
         public Transform SwordPlace;
@@ -37,5 +36,5 @@ namespace Triheroes.Code
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
         }
-    }*/
+    }
 }
