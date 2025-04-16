@@ -22,6 +22,10 @@ namespace Pixify
             throw new InvalidOperationException("cannot start node that is already started");
         }
 
+        
+        /// <summary>
+        /// don't call from inside, use append stop instead if inside
+        /// </summary>
         public void iAbort()
         {
             if (on)
@@ -33,6 +37,9 @@ namespace Pixify
             throw new InvalidOperationException("cannot abort node that is already stopped");
         }
 
+        /// <summary>
+        /// don't call from inside, use append stop instead if inside
+        /// </summary>
         public void iStop()
         {
             if (on)
@@ -44,12 +51,21 @@ namespace Pixify
             throw new InvalidOperationException("cannot stop node: that is already stopped");
         }
 
+        bool stopPending;
+        protected void AppendStop ()
+        {
+            stopPending = true;
+        }
+
         public void iExecute()
         {
             if (on)
             {
-                if (Step())
+                if ( Step() || stopPending )
+                {
                 iStop ();
+                stopPending = false;
+                }
             }
             else
             throw new InvalidOperationException("cannot execute node: that is already stopped");
