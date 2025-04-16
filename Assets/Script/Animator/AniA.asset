@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4705de9d0da624e80b5d1b9693a252, type: 3}
+  m_Name: AniA
+  m_EditorClassIdentifier: 
+  Model: {fileID: 9100000, guid: 9f7445ed5a9c182419b2bfd6d339fdb7, type: 2}
+  SerializedStates:
+  - Key:
+      value: -601574123
+      keyName: idle
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: 1349952704
+      keyName: run
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: -1919845803
+      keyName: walk
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: -276802121
+      keyName: sprint
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: -78586100
+      keyName: fall
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: -1481439722
+      keyName: jump
+    Duration: 0.33333334
+    EvPoint: []
+  - Key:
+      value: -1086562103
+      keyName: slash_0
+    Duration: 0.4666667
+    EvPoint:
+    - 0.16640209
+  - Key:
+      value: -935636897
+      keyName: slash_1
+    Duration: 0.40000004
+    EvPoint:
+    - 0.20419097
+  - Key:
+      value: 1362231781
+      keyName: slash_2
+    Duration: 0.5
+    EvPoint:
+    - 0.189218
+  - Key:
+      value: -1194472396
+      keyName: jump_right_foot
+    Duration: 0.33333337
+    EvPoint: []
+  - Key:
+      value: 541808064
+      keyName: jump_left_foot
+    Duration: 0.33333337
+    EvPoint: []
+  - Key:
+      value: 1523721793
+      keyName: hit
+    Duration: 0.6666667
+    EvPoint: []
+  - Key:
+      value: 630054821
+      keyName: run_lateral
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: 595608524
+      keyName: dash_left
+    Duration: 0.6666667
+    EvPoint: []
+  - Key:
+      value: 1697183041
+      keyName: dash_right
+    Duration: 0.6666667
+    EvPoint: []
+  - Key:
+      value: 875128211
+      keyName: dash_back
+    Duration: 0.53333336
+    EvPoint: []
+  - Key:
+      value: -840575915
+      keyName: dash_forward
+    Duration: 0.53333336
+    EvPoint: []
+  - Key:
+      value: 616666055
+      keyName: sprint_brake
+    Duration: 0.6666667
+    EvPoint: []
+  - Key:
+      value: -1244195535
+      keyName: rotation_brake
+    Duration: 0.15777777
+    EvPoint: []
+  - Key:
+      value: -1336792326
+      keyName: parry_0
+    Duration: 0.8000001
+    EvPoint: []
+  - Key:
+      value: 289444158
+      keyName: fall_end
+    Duration: 0.3
+    EvPoint: []
+  - Key:
+      value: -1411452526
+      keyName: zero
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: -529248224
+      keyName: fall_end_left_foot
+    Duration: 0.2666667
+    EvPoint: []
+  - Key:
+      value: 403116361
+      keyName: fall_end_right_foot
+    Duration: 0.2666667
+    EvPoint: []
+  - Key:
+      value: -1574924820
+      keyName: take_sword
+    Duration: 0.5
+    EvPoint:
+    - 0.25483367
+  - Key:
+      value: 1129474915
+      keyName: return_sword
+    Duration: 0.5
+    EvPoint:
+    - 0.25483367
+  - Key:
+      value: 89747317
+      keyName: return_bow
+    Duration: 0.5
+    EvPoint:
+    - 0.25483367
+  - Key:
+      value: -1490971717
+      keyName: take_bow
+    Duration: 0.5
+    EvPoint:
+    - 0.25483367
+  - Key:
+      value: 372802926
+      keyName: begin_aim
+    Duration: 0.5
+    EvPoint: []
+  - Key:
+      value: 85059151
+      keyName: start_shoot
+    Duration: 0.8333334
+    EvPoint:
+    - 0.050630823
+  SerializedExtStates: []
+  RealLayer: 010000010101
