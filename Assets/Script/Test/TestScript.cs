@@ -13,7 +13,8 @@ public class TestScript : ScriptInit
             new pc_normal_move (),
             new pc_jump (),
             new pc_draw (),
-            new pc_sword ()
+            new pc_sword (),
+            new pc_dash ()
         );
         
         scriptHolder.Add (new SuperKey ("test"), ScriptWriter.NewScriptFromRoot (r));
