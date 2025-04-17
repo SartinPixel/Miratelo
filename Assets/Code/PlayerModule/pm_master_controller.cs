@@ -11,6 +11,7 @@ namespace Triheroes.Code
         m_state_player msp;
         action master;
         public action previousMaster {private set; get;}
+        public action previousState {private set; get;}
 
         protected override void OnAquire()
         {
@@ -23,19 +24,24 @@ namespace Triheroes.Code
 
             master = null;
             previousMaster = null;
+            previousState = null;
         }
 
-        public void SetDefaultMaster (action master, action state)
+        public void SetMaster (action master, action state)
         {
-            if (master != null)
+            if (on)
             {
-            msp.Free (master);
-            previousMaster = master;
-            }
+                if (this.master != null)
+                {
+                previousMaster = master;
+                previousState = msp.state;
+                msp.Free (master);
+                }
 
-            this.master = master;
-            msp.SetState ( state );
-            msp.Aquire (master);
+                this.master = master;
+                msp.SetState ( state );
+                msp.Aquire (master);
+            }
         }
     }
 }
