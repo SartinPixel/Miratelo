@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Pixify
@@ -49,9 +50,16 @@ namespace Pixify
         /// </summary>
         protected abstract void CreateSystems ( out List<CoreSystemBase> Systems);
 
-        public void Register ( core core ) => RequestListModulesOfType ( core.GetType() ).Add (core);
+        public void Register ( core core )
+        {
+            Type t = (core.GetType().GetCustomAttribute <RegisterAsBaseAttribute> () == null) ? core.GetType() : core.GetType().BaseType;
+            RequestListModulesOfType ( t ).Add (core);
+        }
 
     }
+
+    public class RegisterAsBaseAttribute : Attribute
+    {}
 
     public abstract class CoreSystemBase
     {
