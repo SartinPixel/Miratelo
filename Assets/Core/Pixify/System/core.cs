@@ -23,7 +23,7 @@ namespace Pixify
                 throw new InvalidOperationException("cannot aquire, make sure to free it before aquiring");
         }
 
-        public void SelfFree ()
+        protected void SelfFree ()
         {
             if (on)
             {
