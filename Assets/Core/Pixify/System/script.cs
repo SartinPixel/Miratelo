@@ -25,8 +25,7 @@ namespace Pixify
             foreach (action n in actions)
             {
                 n.script = this;
-                host.character.RegisterNode (n);
-                n.Create ();
+                host.character.ConnectAction (n);
             }
         }
 

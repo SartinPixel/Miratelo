@@ -26,14 +26,14 @@ namespace Pixify
                 modules.Add(moduleType, m);
 
                 m.character = this;
-                RegisterNode(m);
+                RegisterNode (m);
+                m.Create ();
 
-                m.Create();
                 return m;
             }
         }
 
-        public void RegisterNode ( node m )
+        void RegisterNode ( node m )
         {
             foreach (var fi in m.GetType().GetFields( BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy))
             {
@@ -44,13 +44,32 @@ namespace Pixify
             }
         }
 
-        public void RegisterRoot (neuro r)
+        /// <summary>
+        /// connect and initialize this node with the character
+        /// </summary>
+        public action ConnectAction (action a)
         {
-            foreach (var n in ScriptWriter.RootToTree ( r ))
-            {
-            RegisterNode (n);
-            n.Create ();
-            }
+            RegisterNode (a);
+            a.Create ();
+            return a;
+        }
+
+        public T ConnectAction <T> (T a) where T:action
+        {
+            RegisterNode (a);
+            a.Create ();
+            return a;
+        }
+
+        /// <summary>
+        /// connect and initialize this root and its tree with the character
+        /// </summary>
+        public action [] ConnectRoot (neuro r)
+        {
+            List<action> actions = ScriptWriter.RootToTree ( r );
+            foreach ( var n in actions )
+            ConnectAction (n);
+            return actions.ToArray();
         }
 
         void Awake()
