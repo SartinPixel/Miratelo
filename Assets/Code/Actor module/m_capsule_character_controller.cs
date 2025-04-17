@@ -46,6 +46,10 @@ namespace Triheroes.Code
 
         protected override void OnAquire()
         {
+            verticalVelocity = 0;
+            velocityDir = Vector3.zero;
+            dir = Vector3.zero;
+
             md.r = CCA.radius;
             md.h = CCA.height;
         }

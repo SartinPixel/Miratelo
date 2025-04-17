@@ -27,6 +27,8 @@ namespace Triheroes.Code
         #region action
         protected override void BeginStep()
         {
+            walkDir = Vector3.zero;
+            walkLatDir = Vector3.zero;
             rotDir = Vecteur.LDir ( ms.RotY, Vector3.forward ) ;
             ToIdle ();
             mccc.Aquire (this);
