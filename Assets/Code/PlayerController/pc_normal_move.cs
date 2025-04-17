@@ -16,7 +16,7 @@ namespace Triheroes.Code
 
         protected override void BeginStep ()
         {
-            pmc.SetDefaultMaster (this, mscch.ss);
+            pmc.SetMaster (this, mscch.ss);
         }
 
         protected override bool Step()
