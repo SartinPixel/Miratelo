@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public sealed class m_state_player : core
+    public class m_state_player : core
     {
-        action state;
+        public action state {private set; get;}
 
         /// <summary>
         /// aquire state player, don't forget to set a state before
         /// </summary>
-        protected override void OnAquire()
+        protected sealed override void OnAquire()
         {
             if (!state.on)
             state.iStart ();
@@ -24,7 +24,7 @@ namespace Triheroes.Code
             }
         }
 
-        protected override void OnFree()
+        protected sealed override void OnFree()
         {
             if (state.on)
             state.iAbort ();
@@ -48,6 +48,10 @@ namespace Triheroes.Code
             this.state = state;
         }
     }
+
+    [RegisterAsBase]
+    public class m_arm_state : m_state_player
+    {}
 
     public class s_state_player : CoreSystem <m_state_player>
     {
