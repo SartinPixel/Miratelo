@@ -48,6 +48,11 @@ namespace Pixify
             return MeetCondition;
         }
 
+        public void Set ( ConditionCheckGateType gate )
+        {
+            ConditionCheckGate = gate;
+        }
+
         public condition_neuro ( condition[] c, action[] o )
         {
             Condition = c;
