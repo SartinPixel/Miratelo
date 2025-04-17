@@ -9,9 +9,9 @@ namespace Triheroes.Code
     {
         [Depend]
         m_state_player msp;
-        action master;
-        public action previousMaster {private set; get;}
-        public action previousState {private set; get;}
+        public action defaultMaster {private set; get;}
+        public action defaultState {private set; get;}
+        public action overrideMaster {private set; get;}
 
         protected override void OnAquire()
         {
@@ -19,29 +19,58 @@ namespace Triheroes.Code
 
         protected override void OnFree()
         {
-            if (master != null)
-            msp.Free (master);
+            if (defaultMaster != null)
+            msp.Free (defaultMaster);
 
-            master = null;
-            previousMaster = null;
-            previousState = null;
+            defaultMaster = null;
+            defaultState = null;
+            overrideMaster = null;
         }
 
-        public void SetMaster (action newMaster, action state)
+        public void SetDefaultMaster (action newMaster, action state)
         {
             if (on)
             {
-                if (master != null)
+                if ( overrideMaster == null )
                 {
-                previousMaster = master;
-                previousState = msp.state;
-                if (msp.on)
-                msp.Free (master);
+                    if (defaultMaster != null)
+                    {
+                    if (msp.on)
+                    msp.Free (defaultMaster);
+                    }
                 }
 
-                master = newMaster;
+                defaultMaster = newMaster;
+                defaultState = state;
+
+                if ( overrideMaster == null )
+                {
                 msp.SetState ( state );
-                msp.Aquire (master);
+                msp.Aquire ( defaultMaster );
+                }
+            }
+        }
+
+        public void Update ()
+        {
+            if ( overrideMaster != null && !msp.on)
+            {
+                msp.SetState ( defaultState );
+                msp.Aquire ( defaultMaster );
+                overrideMaster = null;
+            }
+        }
+
+        public void OverrideMaster (action newOverrideMaster, action state)
+        {
+            if (on && overrideMaster == null )
+            {
+            msp.Free (defaultMaster);
+
+            overrideMaster = newOverrideMaster;
+
+            msp.SetState (state);
+            msp.Aquire ( newOverrideMaster );
             }
         }
     }

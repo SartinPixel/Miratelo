@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class pc_sword : action, ICoreReceptor
+    public class pc_sword : action
     {
         [Depend]
         pm_master_controller pmc;
@@ -23,18 +23,12 @@ namespace Triheroes.Code
             if ( Player.GetButtonDown (BoutonId.Fire1) )
                 {
                 if ( !as1.on )
-                pmc.SetMaster (this, as1);
+                pmc.OverrideMaster (this, as1);
                 else
                 as1.ComboAppend ();
                 }
 
             return false;
-        }
-
-        
-        public void SelfFreed(node AquiredNode)
-        {
-            pmc.SetMaster ( pmc.previousMaster, pmc.previousState );
         }
     }
 }

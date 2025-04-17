@@ -16,6 +16,12 @@ namespace Triheroes.Code
             pmc.Aquire (this);
         }
 
+        protected override bool Step()
+        {
+            pmc.Update ();
+            return false;
+        }
+
         protected override void Stop()
         {
             pmc.Free (this);
