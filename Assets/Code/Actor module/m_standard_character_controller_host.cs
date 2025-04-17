@@ -16,7 +16,7 @@ namespace Triheroes.Code
             agm = new ac_ground_movement();
             af = new ac_fall ();
             ss = new state_switcher ( agm, af );
-            character.RegisterRoot (ss);
+            character.ConnectRoot (ss);
         }
     }
 }
