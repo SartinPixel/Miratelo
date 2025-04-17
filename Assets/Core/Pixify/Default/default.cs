@@ -4,6 +4,22 @@ using UnityEngine;
 
 namespace Pixify
 {
+    public class change_focus : action
+    {
+        SuperKey key;
+
+        public change_focus (SuperKey key)
+        {
+            this.key = key;
+        }
+
+        protected override bool Step()
+        {
+            script.host.ChangeFocus (key);
+            return false;
+        }
+    }
+
     public class Log : action
     {
         string log;

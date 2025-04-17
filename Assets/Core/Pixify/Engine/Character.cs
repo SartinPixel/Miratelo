@@ -54,6 +54,13 @@ namespace Pixify
             return a;
         }
 
+        public node ConnectNode ( node n )
+        {
+            RegisterNode (n);
+            n.Create ();
+            return n;
+        }
+
         public T ConnectAction <T> (T a) where T:action
         {
             RegisterNode (a);

@@ -8,7 +8,7 @@ namespace Pixify
 
     public sealed class script
     {
-        m_character_controller host;
+        public m_character_controller host {get; private set;}
         List <action> actions;
         neuro root;
         

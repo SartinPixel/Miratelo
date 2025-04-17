@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +29,17 @@ namespace Pixify
                     RecursiveAdd (a1);
                 }
             }
-
             return ns;
+        }
+
+        public static action[] o ( params action[] o )
+        {
+            return o;
+        }
+
+        public static condition[] c ( params condition[] c )
+        {
+            return c;
         }
     }
 }
