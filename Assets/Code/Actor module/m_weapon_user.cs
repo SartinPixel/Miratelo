@@ -8,6 +8,7 @@ namespace Triheroes.Code
     public abstract class m_weapon_user : core
     {
         public abstract Weapon WeaponBase { get; }
+        public abstract void SetWeaponBase (Weapon weapon);
     }
 
     public abstract class m_weapon_user<T> : m_weapon_user where T : Weapon
@@ -19,7 +20,12 @@ namespace Triheroes.Code
         public T Weapon { get; protected set; }
         public override Weapon WeaponBase => Weapon;
 
-        public void SetWeapon(T weapon)
+        public override void SetWeaponBase(Weapon weapon)
+        {
+            Weapon = (T) weapon;
+        }
+
+        public void Set(T weapon)
         {
             if (on)
             {

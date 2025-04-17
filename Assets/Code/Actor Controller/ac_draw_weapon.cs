@@ -25,10 +25,7 @@ namespace Triheroes.Code
 
         void done ()
         {
-            if (weapon)
-            {
-                AppendStop ();
-            }
+            AppendStop ();
         }
     }
 }
