@@ -12,7 +12,8 @@ public class TestScript : ScriptInit
             new pc_active_master_controller (),
             new pc_normal_move (),
             new pc_jump (),
-            new pc_draw ()
+            new pc_draw (),
+            new pc_sword ()
         );
         
         scriptHolder.Add (new SuperKey ("test"), ScriptWriter.NewScriptFromRoot (r));
