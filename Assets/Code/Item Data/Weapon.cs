@@ -9,6 +9,7 @@ namespace Triheroes.Code
     {
         public abstract WeaponType WeaponType {get;}
         public abstract SuperKey DefaultDrawAnimation {get;}
+        public abstract SuperKey DefaultReturnAnimation {get;}
     }
 }
 

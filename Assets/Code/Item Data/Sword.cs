@@ -12,6 +12,7 @@ namespace Triheroes.Code
         // setting
         public override WeaponType WeaponType => WeaponType.Sword;
         public override SuperKey DefaultDrawAnimation => AnimationKey.take_sword;
+        public override SuperKey DefaultReturnAnimation => AnimationKey.return_sword;
 
         public SlashAttackSize slashSize;
 

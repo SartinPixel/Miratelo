@@ -5,33 +5,41 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class m_equip : module, ICoreReceptor
+    public sealed class m_equip : module, ICoreReceptor
     {
         [Depend]
         m_arm_state mas;
         [Depend]
         m_sword_user msu;
+        [Depend]
+        m_bow_user mbu;
 
-        List <Weapon> weapons;
-        int ptrWeapon = -1;
+        public List <Weapon> weapons {private set; get;}
+        public int ptrWeapon {private set; get;} = -1;
         public m_weapon_user weaponUser;
 
         public Transform SwordPlace;
         public Transform BowPlace;
 
         public ac_draw_weapon adw;
+        public ac_return_weapon arw;
 
         public override void Create()
         {
             InitialSetting ();
 
             adw = character.ConnectAction ( new ac_draw_weapon() );
+            arw = character.ConnectAction ( new ac_return_weapon() );
         }
 
         void AquireWeapon ( Weapon weapon )
         {
             weapons.Add ( weapon );
+            AttachWeapon ( weapon );
+        }
 
+        void AttachWeapon (Weapon weapon)
+        {
             if (weapon is Sword)
             weapon.transform.SetParent (SwordPlace);
             if (weapon is Bow)
@@ -65,6 +73,34 @@ namespace Triheroes.Code
             }
         }
 
+        public void ReturnWeapon ()
+        {
+            if ( weaponUser != null && !arw.on )
+            {
+                arw.Set (weapons [ptrWeapon].DefaultReturnAnimation);
+                mas.SetState (arw);
+                mas.Aquire (this);
+            }
+        }
+
+        public void SelfFreed(node AquiredNode)
+        {
+            if (AquiredNode == mas)
+            {
+            if (mas.state == adw)
+            StartWeaponUser ();
+            if (mas.state == arw)
+            ReturnWeaponDone ();
+            }
+        }
+
+        void ReturnWeaponDone ()
+        {
+            StopWeaponUser ();
+            AttachWeapon ( weapons [ptrWeapon] );
+            ptrWeapon = -1;
+        }
+
         void StartWeaponUser ()
         {
             weaponUser =  GetCorrespondingWeaponUser ( weapons [ptrWeapon].WeaponType );
@@ -72,10 +108,10 @@ namespace Triheroes.Code
             weaponUser.Aquire (this);
         }
 
-        public void SelfFreed(node AquiredNode)
+        void StopWeaponUser ()
         {
-            if (AquiredNode == mas && mas.state == adw)
-            StartWeaponUser ();
+            weaponUser.Free (this);
+            weaponUser = null;
         }
 
         m_weapon_user GetCorrespondingWeaponUser ( WeaponType Wt )
@@ -83,6 +119,7 @@ namespace Triheroes.Code
             switch (Wt)
             {
                 case WeaponType.Sword: return msu;
+                case WeaponType.Bow: return mbu;
             }
             return null;
         }

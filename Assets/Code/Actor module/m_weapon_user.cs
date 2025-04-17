@@ -44,7 +44,7 @@ namespace Triheroes.Code
         protected abstract int HandIndex { get; }
         protected abstract int AniLayer { get; }
         protected abstract Quaternion DefaultRotation { get; }
-
+ 
         public sealed override void Create()
         {
             Hand = character.GetComponent<ABase>().Skin.Hand;

@@ -5,27 +5,28 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_draw_weapon : action
+    public class ac_return_weapon : action
     {
+
         [Depend]
         m_skin ms;
-        Weapon weapon;
-        SuperKey DrawAnimation;
+
+        SuperKey ReturnAnimation;
 
         protected override void BeginStep()
         {
-            ms.PlayState ( ms.r_arm, DrawAnimation, 0.1f, null, null, done );
+            ms.PlayState ( ms.r_arm, ReturnAnimation, 0.1f, null, null, done );
         }
 
-        public void Set ( Weapon weapon, SuperKey drawAnimation )
+        public void Set ( SuperKey returnAnimation )
         {
-            this.weapon = weapon;
-            DrawAnimation = drawAnimation;
+            ReturnAnimation = returnAnimation;
         }
 
         void done ()
         {
             AppendStop ();
         }
+
     }
 }
