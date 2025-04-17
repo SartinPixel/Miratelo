@@ -28,7 +28,11 @@ namespace Pixify
             if (on)
             {
                 if (host is ICoreReceptor h)
+                {
+                Free (host);
                 h.SelfFreed (this);
+                }
+                else
                 Free (host);
             }
             else

@@ -29,7 +29,6 @@ namespace Pixify
             }
         }
 
-
         public bool on { private set; get;}        
         public void Start ()
         {

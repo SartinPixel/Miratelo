@@ -35,6 +35,7 @@ namespace Triheroes.Code
                 {
                 previousMaster = master;
                 previousState = msp.state;
+                if (msp.on)
                 msp.Free (master);
                 }
 
