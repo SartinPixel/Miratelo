@@ -9,6 +9,7 @@ public class TestScript : ScriptInit
     public override void OnAddScript( Dictionary <SuperKey, script> scriptHolder )
     {
         var r = new parallel (
+            new pc_active_master_controller (),
             new pc_normal_move (),
             new pc_jump (),
             new pc_draw ()

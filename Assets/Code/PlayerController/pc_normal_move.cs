@@ -8,7 +8,7 @@ namespace Triheroes.Code
     public class pc_normal_move : action
     {
         [Depend]
-        m_state_player msp;
+        pm_master_controller pmc;
         [Depend]
         m_standard_character_controller_host mscch;
         [Depend]
@@ -16,8 +16,7 @@ namespace Triheroes.Code
 
         protected override void BeginStep ()
         {
-            msp.SetState (mscch.ss);
-            msp.Aquire (this);
+            pmc.SetDefaultMaster (this, mscch.ss);
         }
 
         protected override bool Step()
@@ -31,11 +30,6 @@ namespace Triheroes.Code
             mscch.af.MoveAir ( InputAxis );
 
             return false;
-        }
-
-        protected override void Stop()
-        {
-            msp.Free (this);
         }
     }
 }
