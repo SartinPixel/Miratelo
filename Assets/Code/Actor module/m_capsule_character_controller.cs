@@ -11,6 +11,8 @@ namespace Triheroes.Code
         public m_ground_data mgd;
         [Depend]
         m_dimension md;
+        [Depend]
+        public m_skin ms;
 
         public bool gravity;
         public float verticalVelocity;

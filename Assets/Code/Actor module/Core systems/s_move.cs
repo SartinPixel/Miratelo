@@ -9,8 +9,8 @@ namespace Triheroes.Code
     {
         protected override void Main(m_capsule_character_controller o)
         {
-            /*if (o.ms.SkinMove)
-            o.directionComposite += o.ms.GetSpdCurves() * o.ms.SkinDir * Time.deltaTime/*a*/;
+            if (o.ms.SkinMove)
+            o.dir += o.ms.GetSpdCurves() * o.ms.SkinDir * Time.deltaTime/*a*/;
 
             if (o.velocityDir.sqrMagnitude > 0)
                 o.velocityDir = Vector3.MoveTowards(o.velocityDir, Vector3.zero, Vecteur.Drag * Time.deltaTime/*a*/);
