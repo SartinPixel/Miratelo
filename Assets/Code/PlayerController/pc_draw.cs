@@ -13,11 +13,6 @@ namespace Triheroes.Code
         int ptrWeapon;
         bool pendingSwap;
 
-        protected override void BeginStep()
-        {
-
-        }
-
         protected override bool Step()
         {
             if (Player.GetButtonDown(BoutonId.A))
