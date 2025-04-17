@@ -27,18 +27,18 @@ namespace Triheroes.Code
             previousState = null;
         }
 
-        public void SetMaster (action master, action state)
+        public void SetMaster (action newMaster, action state)
         {
             if (on)
             {
-                if (this.master != null)
+                if (master != null)
                 {
                 previousMaster = master;
                 previousState = msp.state;
                 msp.Free (master);
                 }
 
-                this.master = master;
+                master = newMaster;
                 msp.SetState ( state );
                 msp.Aquire (master);
             }
