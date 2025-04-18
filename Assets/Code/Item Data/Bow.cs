@@ -12,5 +12,7 @@ namespace Triheroes.Code
         public override SuperKey DefaultReturnAnimation => AnimationKey.return_bow;
 
         public Transform BowString;
+        public DotSkin ArrowPaper;
+        public float Speed = 30;
     }
 }
