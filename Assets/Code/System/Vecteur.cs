@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pixify;
 
 namespace Triheroes.Code
 {
@@ -97,5 +98,38 @@ namespace Triheroes.Code
 	public static class ColliderExtensions
 	{
 		public static int id(this Collider c) => c.gameObject.GetInstanceID();
+	}
+
+	
+	// character sorting by average angle and distance
+	public class SortDistanceA<T> : IComparer<T> where T : module
+	{
+		float Y;
+		Vector3 SelfPos;
+		float Distance;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Y"> euleur y of character's direction </param>
+		/// <param name="Self"> the character's transform  </param>
+		public SortDistanceA(float Y, Vector3 Self, float Distance)
+		{
+			this.Y = Y;
+			this.SelfPos = Self;
+			this.Distance = Distance;
+		}
+
+		// compare by average distance and average angle
+		public int Compare(T x, T y)
+		{
+			float AngleDistanceRatio = Mathf.Abs(Mathf.DeltaAngle(Y, Vecteur.RotDirectionY(SelfPos, x.character.transform.position))) / 180;
+			float DistanceRatio = Vector3.Distance(SelfPos, x.character.transform.position) / Distance;
+			float xAverage = (AngleDistanceRatio + DistanceRatio) / 2;
+			AngleDistanceRatio = Mathf.Abs(Mathf.DeltaAngle(Y, Vecteur.RotDirectionY(SelfPos, y.character.transform.position))) / 180;
+			DistanceRatio = Vector3.Distance(SelfPos, y.character.transform.position) / Distance;
+			float yAverage = (AngleDistanceRatio + DistanceRatio) / 2;
+			return (int)Mathf.Sign(xAverage - yAverage);
+		}
 	}
 }
