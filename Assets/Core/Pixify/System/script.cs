@@ -9,7 +9,7 @@ namespace Pixify
     public sealed class script
     {
         public m_character_controller host {get; private set;}
-        List <action> actions;
+        public List <action> actions {get; private set;}
         neuro root;
         
         public script ( List <action> ns, neuro root )
