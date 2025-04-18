@@ -15,6 +15,14 @@ namespace Pixify
             return new script ( RootToTree (root), root );
         }
 
+        public static script NewScriptFromRoots ( params neuro[] roots )
+        {
+            List <action> actions = new List<action>();
+            foreach ( var r in roots )
+            actions.AddRange (RootToTree (r));
+            return new script ( actions , roots [0] );
+        }
+
         public static List<action> RootToTree ( neuro root )
         {
             List <action> ns = new List<action>();
