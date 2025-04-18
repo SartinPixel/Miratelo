@@ -20,6 +20,22 @@ namespace Pixify
         }
     }
 
+    public class change_root : action
+    {
+        neuro newRoot;
+
+        public change_root (neuro root)
+        {
+            newRoot = root;
+        }
+
+        protected override bool Step()
+        {
+            script.ChangeRoot ( newRoot );
+            return false;
+        }
+    }
+
     public class Log : action
     {
         string log;
