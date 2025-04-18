@@ -11,7 +11,14 @@ public class scr_enemy_test : ScriptInit
     {
         var r1 = new sequence (
             new ac_goto_target_agm ( 10, 4, true ),
-            new Null ()
+            new ac_equip_weapon ( 1 ),
+            new parallel (
+                new ac_idle (),
+                new ac_aim_target (),
+                new spawner (
+                    new ac_bow_shoot ()
+                ).Set ( true, 3, 2 )
+                )
         );
 
         var r = new sequence (
