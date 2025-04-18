@@ -64,7 +64,7 @@ namespace Triheroes.Code
         
         public void DrawWeapon ( int id )
         {
-            if ( weaponUser == null && !adw.on && weapons [id] )
+            if ( weaponUser == null && !mas.on && weapons [id] )
             {
             adw.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
             mas.SetState (adw);
@@ -75,7 +75,7 @@ namespace Triheroes.Code
 
         public void ReturnWeapon ()
         {
-            if ( weaponUser != null && !arw.on )
+            if ( weaponUser != null && !mas.on )
             {
                 arw.Set (weapons [ptrWeapon].DefaultReturnAnimation);
                 mas.SetState (arw);
@@ -89,7 +89,7 @@ namespace Triheroes.Code
             {
             if (mas.state == adw)
             StartWeaponUser ();
-            if (mas.state == arw)
+            else if (mas.state == arw)
             ReturnWeaponDone ();
             }
         }
