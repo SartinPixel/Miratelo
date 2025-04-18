@@ -13,14 +13,12 @@ namespace Triheroes.Code
         public action defaultState {private set; get;}
         public action overrideMaster {private set; get;}
 
-        protected override void OnAquire()
-        {
-        }
-
         protected override void OnFree()
         {
-            if (defaultMaster != null)
+            if (defaultMaster != null && overrideMaster == null)
             msp.Free (defaultMaster);
+            if ( overrideMaster != null )
+            msp.Free (overrideMaster);
 
             defaultMaster = null;
             defaultState = null;
