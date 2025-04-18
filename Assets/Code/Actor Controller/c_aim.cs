@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_aim : action
+    public class c_aim : action
     {
         [Depend]
         m_skin ms;
@@ -82,8 +82,8 @@ namespace Triheroes.Code
         {
             if (on)
             {
-                if ( mscch.agm.state != StateKey.idle || Mathf.Abs (Mathf.DeltaAngle(TargetRotDirection.y , ms.RotY.y)) > 20 )
-                mscch.agm.rotDir = Vecteur.LDir ( Vector3.up * TargetRotDirection.y, Vector3.forward);
+                if ( mscch.cgm.state != StateKey.idle || Mathf.Abs (Mathf.DeltaAngle(TargetRotDirection.y , ms.RotY.y)) > 20 )
+                mscch.cgm.rotDir = Vecteur.LDir ( Vector3.up * TargetRotDirection.y, Vector3.forward);
             }
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_ground_movement : action
+    public class c_ground_movement : action
     {
         [Depend]
         m_capsule_character_controller mccc;
@@ -42,7 +42,7 @@ namespace Triheroes.Code
             // fall check
             if (!mgd.onGround && mccc.verticalVelocity < 0)
             {
-                mscch.ss.nextState = mscch.af;
+                mscch.ss.nextState = mscch.cf;
                 return true;
             }
 
@@ -228,7 +228,7 @@ namespace Triheroes.Code
             mccc.verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y * mccc.m);
             walkFactor = WalkLevel;
             ms.PlayState(0, jumpAnimation, 0.05f );
-            mscch.af.AnimationFallEnd = fallEndAnimation;
+            mscch.cf.AnimationFallEnd = fallEndAnimation;
             
             state = StateKey.jump;
             }

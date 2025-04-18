@@ -46,7 +46,7 @@ namespace Triheroes.Code
             Vector3 direction = (targetPosition - ma.ms.Coord.position).Flat ();
 
             if ( Vector3.Distance (ma.ms.Coord.position, targetPosition) > distance )
-            mscch.agm.Walk ( direction.normalized * Speed );
+            mscch.cgm.Walk ( direction.normalized * Speed );
             else if (StopWhenDone)
             return true;
 

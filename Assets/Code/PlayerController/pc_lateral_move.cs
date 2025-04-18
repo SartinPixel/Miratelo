@@ -26,9 +26,9 @@ namespace Triheroes.Code
             InputAxis = Vecteur.LDir (new Vector3(0, MainCamera.o.RotY.y, 0),InputAxis) * 6f;
 
             if (mgd.onGround)
-            mscch.agm.WalkLateral ( InputAxis );
+            mscch.cgm.WalkLateral ( InputAxis );
             else
-            mscch.af.MoveAir ( InputAxis );
+            mscch.cf.MoveAir ( InputAxis );
 
             return false;
         }

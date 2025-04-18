@@ -21,12 +21,12 @@ namespace Triheroes.Code
             {
                 IsJumping = true;
                 JumpTimeHeld = 1;
-                mscch.agm.JumpOnce(3, Player.GetButton(BoutonId.Fire2) ? WalkFactor.sprint : WalkFactor.run);
+                mscch.cgm.JumpOnce(3, Player.GetButton(BoutonId.Fire2) ? WalkFactor.sprint : WalkFactor.run);
             }
             if (IsJumping == true && JumpTimeHeld >= 0)
             {
                 JumpTimeHeld -= Time.deltaTime;
-                mscch.agm.JumpStep(1.5f);
+                mscch.cgm.JumpStep(1.5f);
             }
             if (Player.GetButtonUp(BoutonId.Jump) && IsJumping)
             {

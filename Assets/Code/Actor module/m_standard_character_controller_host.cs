@@ -7,15 +7,15 @@ namespace Triheroes.Code
 {
     public class m_standard_character_controller_host : module
     {
-        public ac_ground_movement agm;
-        public ac_fall af;
+        public c_ground_movement cgm;
+        public c_fall cf;
         public state_switcher ss {private set; get;}
 
         public override void Create()
         {
-            agm = new ac_ground_movement();
-            af = new ac_fall ();
-            ss = new state_switcher ( agm, af );
+            cgm = new c_ground_movement();
+            cf = new c_fall ();
+            ss = new state_switcher ( cgm, cf );
             character.ConnectRoot (ss);
         }
     }

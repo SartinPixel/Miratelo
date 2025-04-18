@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_draw_weapon : action
+    public class c_draw_weapon : action
     {
         [Depend]
         m_skin ms;

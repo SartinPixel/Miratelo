@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_fall : action
+    public class c_fall : action
     {
         [Depend]
         m_ground_data mgd;
@@ -20,7 +20,7 @@ namespace Triheroes.Code
 
         public void MoveAir( Vector3 DirPerS)
         {
-            mccc.dir += DirPerS * Time.deltaTime/*a*/ * mscch.agm.walkFactor;
+            mccc.dir += DirPerS * Time.deltaTime/*a*/ * mscch.cgm.walkFactor;
         }
         
         protected override void BeginStep()
@@ -34,7 +34,7 @@ namespace Triheroes.Code
             if (mgd.onGround && mccc.verticalVelocity < 0 && Vector3.Angle (Vector3.up, mgd.groundNormal) <= 45)
             {
                 ms.PlayState(ms.knee, AnimationFallEnd, 0.05f);
-                mscch.ss.nextState = mscch.agm;
+                mscch.ss.nextState = mscch.cgm;
                 return true;
             }
             return false;

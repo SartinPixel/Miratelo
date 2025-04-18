@@ -15,24 +15,24 @@ namespace Triheroes.Code
 
         protected override bool Step()
         {
-            if (mbu.aa.on)
+            if (mbu.cc.on)
             {
                 Vector3 RotDirection = Vecteur.RotDirection ( mbu.Weapon.BowString.position, MainCamera.PointScreenCenter( mbu.character.transform ) );
-                mbu.aa.Aim ( RotDirection );
+                mbu.cc.Aim ( RotDirection );
                 
-                mbu.aa.TurnToTargetRot ( RotDirection );
+                mbu.cc.TurnToTargetRot ( RotDirection );
 
                 if (Player.GetButtonDown (BoutonId.Fire3))
                 {
-                mbu.aa.EndAim ();
+                mbu.cc.EndAim ();
                 return false;
                 }
                 else if (Player.GetButtonDown (BoutonId.Fire1))
-                mbu.aa.StartShoot ();
+                mbu.cc.StartShoot ();
             }
             else if ( !mas.on && Player.GetButtonDown (BoutonId.Fire3) )
             {
-                mas.SetState ( mbu.aa );
+                mas.SetState ( mbu.cc );
                 mas.Aquire (this);
             }
             return false;

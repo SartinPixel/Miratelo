@@ -25,9 +25,9 @@ namespace Triheroes.Code
             InputAxis = Player.GetAxis3();
             InputAxis = Vecteur.LDir (new Vector3(0, MainCamera.o.RotY.y, 0),InputAxis) * 6f;
             if (mgd.onGround)
-            mscch.agm.Walk ( InputAxis, Player.GetButton (BoutonId.Fire2) ? WalkFactor.sprint : Input.GetKey (KeyCode.X) ? WalkFactor.walk : WalkFactor.run );
+            mscch.cgm.Walk ( InputAxis, Player.GetButton (BoutonId.Fire2) ? WalkFactor.sprint : Input.GetKey (KeyCode.X) ? WalkFactor.walk : WalkFactor.run );
             else
-            mscch.af.MoveAir ( InputAxis );
+            mscch.cf.MoveAir ( InputAxis );
 
             return false;
         }

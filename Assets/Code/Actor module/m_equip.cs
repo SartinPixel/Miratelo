@@ -21,15 +21,15 @@ namespace Triheroes.Code
         public Transform SwordPlace;
         public Transform BowPlace;
 
-        public ac_draw_weapon adw;
-        public ac_return_weapon arw;
+        public c_draw_weapon cdw;
+        public c_return_animation crw;
 
         public override void Create()
         {
             InitialSetting ();
 
-            adw = character.ConnectAction ( new ac_draw_weapon() );
-            arw = character.ConnectAction ( new ac_return_weapon() );
+            cdw = character.ConnectAction ( new c_draw_weapon() );
+            crw = character.ConnectAction ( new c_return_animation() );
         }
 
         void AquireWeapon ( Weapon weapon )
@@ -66,8 +66,8 @@ namespace Triheroes.Code
         {
             if ( weaponUser == null && !mas.on && weapons [id] )
             {
-            adw.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
-            mas.SetState (adw);
+            cdw.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
+            mas.SetState (cdw);
             mas.Aquire (this);
             ptrWeapon = id;
             }
@@ -77,8 +77,8 @@ namespace Triheroes.Code
         {
             if ( weaponUser != null && !mas.on )
             {
-                arw.Set (weapons [ptrWeapon].DefaultReturnAnimation);
-                mas.SetState (arw);
+                crw.Set (weapons [ptrWeapon].DefaultReturnAnimation);
+                mas.SetState (crw);
                 mas.Aquire (this);
             }
         }
@@ -87,9 +87,9 @@ namespace Triheroes.Code
         {
             if (AquiredNode == mas)
             {
-            if (mas.state == adw)
+            if (mas.state == cdw)
             StartWeaponUser ();
-            else if (mas.state == arw)
+            else if (mas.state == crw)
             ReturnWeaponDone ();
             }
         }
