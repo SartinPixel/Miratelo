@@ -12,6 +12,7 @@ namespace Pixify
     {
 
         protected Dictionary<Type, module> modules;
+        List <node> nodes;
 
         public module NeedModule(Type moduleType)
         {
@@ -33,38 +34,56 @@ namespace Pixify
             }
         }
 
+        uint ptr;
         void RegisterNode ( node m )
         {
-            foreach (var fi in m.GetType().GetFields( BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy))
+            ptr ++;
+            m.id = ptr;
+            nodes.Add (m);
+
+            Type current = m.GetType ();
+            while ( current != typeof ( node ) )
             {
-                if (fi.GetCustomAttribute<DependAttribute>() != null)
+                var fis = current.GetFields( BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                foreach (var fi in fis)
                 {
+                if (fi.GetCustomAttribute<DependAttribute>() != null)
                     fi.SetValue ( m, NeedModule(fi.FieldType) );
                 }
+                current = current.BaseType;
             }
         }
 
         /// <summary>
-        /// connect and initialize this node with the character
+        /// connect and initialize this node with the character if it is not connected
         /// </summary>
         public action ConnectAction (action a)
         {
-            RegisterNode (a);
-            a.Create ();
+            if (!nodes.Contains (a))
+            {
+                RegisterNode (a);
+                a.Create ();
+            }
             return a;
         }
 
         public node ConnectNode ( node n )
         {
-            RegisterNode (n);
-            n.Create ();
+            if (!nodes.Contains (n))
+            {
+                RegisterNode (n);
+                n.Create ();
+            }
             return n;
         }
 
         public T ConnectAction <T> (T a) where T:action
         {
-            RegisterNode (a);
-            a.Create ();
+            if (!nodes.Contains (a))
+            {
+                RegisterNode (a);
+                a.Create ();
+            }
             return a;
         }
 
@@ -82,6 +101,7 @@ namespace Pixify
         void Awake()
         {
             modules = new Dictionary<Type, module> ();
+            nodes = new List<node>();
             GetCharacterControllerData ();
         }
 
@@ -97,8 +117,9 @@ namespace Pixify
 
                 m_character_controller mcc = new m_character_controller ( scripts );
                 mcc.character = this;
-                mcc.Create ();
                 modules.Add (mcc.GetType(),mcc);
+                nodes.Add (mcc);
+                mcc.Create ();
 
                 mcc.Aquire ( new Null() );
             }

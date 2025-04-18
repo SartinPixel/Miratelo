@@ -11,6 +11,12 @@ namespace Pixify
         /// called by the host controller ( script engine or character )
         /// </summary>
         public virtual void Create () {}
+
+        /// <summary>
+        /// registered id for the character
+        /// </summary>
+        [HideInInspector]
+        public uint id;
     }
 
     [AttributeUsage (AttributeTargets.Field)]
