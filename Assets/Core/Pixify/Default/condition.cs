@@ -6,7 +6,7 @@ namespace Pixify
 {
     public abstract class condition : node
     {
-        bool inverse;
+        public bool inverse;
 
         public bool Check ()
         {
