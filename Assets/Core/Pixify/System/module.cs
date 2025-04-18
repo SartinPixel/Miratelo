@@ -6,6 +6,7 @@ namespace Pixify
 {
     public abstract class module : node
     {
+        [HideInInspector]
         public Character character;
     }
 }
