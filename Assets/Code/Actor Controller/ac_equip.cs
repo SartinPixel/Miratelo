@@ -5,6 +5,31 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
+    public class ac_equip_weapon : action
+    {
+        [Depend]
+        m_equip me;
+
+        int weaponIndex;
+
+        public ac_equip_weapon ( int id )
+        {
+            weaponIndex = id;
+        }
+
+        protected override void BeginStep()
+        {
+            me.DrawWeapon ( weaponIndex );
+        }
+
+        protected override bool Step()
+        {
+            if ( me.ptrWeapon == weaponIndex && me.weaponUser != null )
+            return true;
+            return false;
+        }
+    }
+
     public class ac_has_active_weapon : condition
     {
         [Depend]
