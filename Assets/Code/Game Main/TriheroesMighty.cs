@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Pixify;
@@ -9,6 +10,8 @@ namespace Triheroes.Code
     {
         protected override void CreateSystems(out List<CoreSystemBase> Systems)
         {
+            gameObject.AddComponent <GlobalAI> ();
+
             Systems = new List<CoreSystemBase>()
             {
                 // character physic data
