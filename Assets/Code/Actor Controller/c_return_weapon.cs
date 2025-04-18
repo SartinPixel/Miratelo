@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class c_return_animation : action
+    public class c_return_weapon_animation : action
     {
         [Depend]
         m_skin ms;
