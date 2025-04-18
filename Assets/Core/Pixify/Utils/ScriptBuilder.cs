@@ -32,13 +32,19 @@ namespace Pixify
             return ns;
         }
 
-        public static action[] o ( params action[] o )
+        public static action[] DO ( params action[] o )
         {
             return o;
         }
 
-        public static condition[] c ( params condition[] c )
+        public static condition[] IF ( params condition[] c )
         {
+            return c;
+        }
+
+        public static condition NOT ( condition c )
+        {
+            c.inverse = true;
             return c;
         }
     }
