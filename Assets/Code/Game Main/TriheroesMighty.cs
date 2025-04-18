@@ -10,7 +10,11 @@ namespace Triheroes.Code
     {
         protected override void CreateSystems(out List<CoreSystemBase> Systems)
         {
+            // scene hardcoded system
             gameObject.AddComponent <GlobalAI> ();
+
+            // scene hardcoded pool
+            d_trajectile.InitPool (32);
 
             Systems = new List<CoreSystemBase>()
             {
@@ -23,6 +27,9 @@ namespace Triheroes.Code
                 // character controller and AI
                 new s_character_controller (),
                 new s_state_player (),
+
+                // active attacks
+                new d_trajectile.s_trajectile (),
 
                 // character physic
                 new s_ccc_gravity (),
