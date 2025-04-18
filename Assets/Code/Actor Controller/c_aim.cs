@@ -92,16 +92,4 @@ namespace Triheroes.Code
             AppendStop ();
         }
     }
-
-    public class ac_bow_is_aiming : condition
-    {
-        [Depend]
-        m_bow_user mbu;
-
-        protected override bool OnCheck()
-        {
-            return mbu.state == StateKey.aim;
-        }
-    }
-
 }
