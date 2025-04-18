@@ -72,9 +72,9 @@ namespace Pixify
             }
         }
 
-        protected static T BeginPiow ()
+        protected static T BeginFire ()
         {
-            if (IsPiowing)
+            if (Firing)
             throw new InvalidOperationException ("FATAL ERROR: BeginPiow when a piow was in progress");
 
             if (poolB.Count == 0)
@@ -82,19 +82,19 @@ namespace Pixify
             
             hotIndex = poolB.Dequeue();
             T a = poolC [hotIndex];
-            IsPiowing = true;
+            Firing = true;
 
             return a;
         }
 
-        protected static void EndPiow ()
+        protected static void EndFire ()
         {
-            IsPiowing = false;
+            Firing = false;
             poolC [hotIndex].Aquire ( poolA [hotIndex] );
         }
 
         static int hotIndex;
-        static bool IsPiowing;
+        static bool Firing;
 
         public static void DePiow (vDot<T> DotV)
         {
