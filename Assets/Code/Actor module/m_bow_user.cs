@@ -11,14 +11,14 @@ namespace Triheroes.Code
         protected override int AniLayer => ms.bow;
         protected override Quaternion DefaultRotation => Const.BowDefaultRotation;
 
-        public c_aim cc {private set; get;}
+        public c_aim ca {private set; get;}
 
         public Vector3 RotY;
         public SuperKey state = StateKey.zero;
 
         protected override void Create1()
         {
-            cc = character.ConnectAction (new c_aim());
+            ca = character.ConnectAction (new c_aim());
         }
         protected override void OnAquire1()
         {
