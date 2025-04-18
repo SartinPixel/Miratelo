@@ -13,6 +13,7 @@ public class PlayerController : ScriptInit
         var pc_draw = new pc_draw ();
         var pc_jump = new pc_jump ();
         var pc_normal_move = new pc_normal_move ();
+        var pc_lateral_move = new pc_lateral_move ();
 
 
         var r = new parallel(
@@ -51,9 +52,15 @@ public class PlayerController : ScriptInit
 
         r = new parallel(
                 new pc_active_master_controller(),
-                pc_normal_move,
+                new parallel (
+                    new guard ( IF ( new ac_bow_is_aiming () ),
+                                DO ( pc_lateral_move ) ),
+                    new guard ( IF ( NOT (new ac_bow_is_aiming ()) ),
+                                DO ( pc_normal_move ) )
+                ),
                 pc_jump,
                 pc_draw,
+                new pc_bow(),
                 new guard ( IF (NOT(new ac_check_active_weapon_type (WeaponType.Bow))),
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
         );

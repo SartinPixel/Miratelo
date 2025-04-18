@@ -48,6 +48,7 @@ namespace Triheroes.Code
         public sealed override void Create()
         {
             Hand = character.GetComponent<ABase>().Skin.Hand;
+            Create1 ();
         }
 
         protected sealed override void OnAquire()
@@ -77,6 +78,9 @@ namespace Triheroes.Code
         }
 
         protected virtual void OnAquire1()
+        { }
+
+        protected virtual void Create1()
         { }
     }
 }
