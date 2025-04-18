@@ -47,6 +47,8 @@ namespace Pixify
                 
                 EditorGUILayout.EndVertical();
             }
+
+            Repaint ();
         }
 
         void CreateInspectors ()
