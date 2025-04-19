@@ -11,7 +11,7 @@ namespace Triheroes.Code
 
         // extra metadata
         [SerializeField]
-        public List <AniExt.StateExt> AniExtStatesExt;
+        public List <AniExt.StateExt> StateExt;
 
         [Header("common transform")]
         public Transform[] Hand;
