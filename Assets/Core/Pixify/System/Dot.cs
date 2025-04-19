@@ -96,7 +96,7 @@ namespace Pixify
         static int hotIndex;
         static bool Firing;
 
-        public static void DePiow (vDot<T> DotV)
+        public static void DeFire (vDot<T> DotV)
         {
             int index = DotV.index;
             poolB.Enqueue(index);
