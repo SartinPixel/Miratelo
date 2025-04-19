@@ -9,6 +9,8 @@ namespace Triheroes.Code
     {
         [Depend]
         pm_master_controller pmc;
+        [Depend]
+        m_trajectile_alert mta;
 
         ac_slash as1;
 
@@ -17,6 +19,10 @@ namespace Triheroes.Code
             as1 = pmc.character.ConnectAction ( new ac_slash () );
         }
 
+        protected override void BeginStep()
+        {
+            mta.Aquire (this);
+        }
 
         protected override bool Step()
         {
@@ -28,7 +34,15 @@ namespace Triheroes.Code
                 as1.ComboAppend ();
                 }
 
+            if (mta.Alert)
+            Debug.Log ("alert");
+
             return false;
+        }
+
+        protected override void Stop()
+        {
+            mta.Free (this);
         }
     }
 }

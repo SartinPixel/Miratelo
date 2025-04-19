@@ -22,6 +22,9 @@ namespace Triheroes.Code
             // scene hardcoded object
              sp_slash = Loader.LoadIntoScene <SpectreAbs> ( "sp/sp_slash" );
 
+            // scene hardcoded index module
+            m_trajectile_alert.InitIndex ();
+
             Systems = new List<CoreSystemBase>()
             {
                 // character physic data
@@ -34,7 +37,9 @@ namespace Triheroes.Code
                 new s_character_controller (),
                 new s_state_player (),
 
-                // active attacks
+                // attack predictions
+                new m_trajectile_alert.s_trajectile_alert (),
+                // attacks
                 new d_slash_attack.s_slash_attack (),
                 new d_trajectile.s_trajectile (),
 

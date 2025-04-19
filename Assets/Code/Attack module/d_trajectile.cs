@@ -32,6 +32,7 @@ namespace Triheroes.Code
             ShootCast ();
             DrawGraphic ();
             CheckLife ();
+            SendAlert ();
         }
 
         void ShootCast ()
@@ -65,6 +66,16 @@ namespace Triheroes.Code
                 DeFire(this);
                 return;
             }
+        }
+
+        void SendAlert ()
+        {
+            if (Physics.Raycast(position, Vecteur.Forward(rotation), out RaycastHit hit, 2 * speed, Vecteur.SolidCharacterAttack))
+            {
+                if (m_trajectile_alert.index.TryGetValue(hit.collider.id() , out m_trajectile_alert A))
+                    A.AlertIncomingTrajectile ( this , hit.distance / speed );
+            }
+            return;
         }
 
         public class s_trajectile : CoreSystem<d_trajectile>
