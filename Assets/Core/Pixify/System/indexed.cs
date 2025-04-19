@@ -19,6 +19,7 @@ namespace Pixify
         public sealed override void Create()
         {
             index.Add(character.gameObject.GetInstanceID(), this as T);
+            Create1 ();
         }
 
         public virtual void Create1 () {}

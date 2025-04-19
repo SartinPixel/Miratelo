@@ -33,10 +33,7 @@ namespace Triheroes.Code
                 else
                 as1.ComboAppend ();
                 }
-
-            if (mta.Alert)
-            Debug.Log ("alert");
-
+                
             return false;
         }
 

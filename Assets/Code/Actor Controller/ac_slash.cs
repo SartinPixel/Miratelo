@@ -12,6 +12,8 @@ namespace Triheroes.Code
         m_sword_user msu;
         [Depend]
         m_skin ms;
+        [Depend]
+        m_actor ma;
 
         bool nextComboReady;
 
@@ -52,7 +54,7 @@ namespace Triheroes.Code
 
         void Slash ()
         {
-            d_slash_attack.Fire ( ms.Coord.position + Vecteur.LDir ( ms.RotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.RotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
+            d_slash_attack.Fire ( ma, ms.Coord.position + Vecteur.LDir ( ms.RotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.RotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
         }
 
         void ComboEnd ()

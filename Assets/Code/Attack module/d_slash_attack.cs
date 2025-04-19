@@ -11,11 +11,13 @@ namespace Triheroes.Code
         SlashAttackSize targSize;
 
         float time;
+        m_actor origin;
 
-        public static void Fire ( Vector3 pos, Quaternion rot, SlashAttackSize Size )
+        public static void Fire ( m_actor sender, Vector3 pos, Quaternion rot, SlashAttackSize Size )
         {
             var a = BeginFire ();
 
+            a.origin = sender;
             a.Col.transform.position = pos; a.Col.transform.rotation = rot;
             a.targSize = Size;
 
@@ -40,6 +42,7 @@ namespace Triheroes.Code
         protected override void OnAquire()
         {
             Col.gameObject.SetActive (true);
+            HittedCharacter.Clear ();
         }
 
         protected override void OnFree()
@@ -47,10 +50,14 @@ namespace Triheroes.Code
             Col.gameObject.SetActive (false);
         }
 
-            
+        List<m_attack_receiver> HittedCharacter = new List<m_attack_receiver>();
         void OnCollisionDetected (Collision col)
         {
-
+            if ( m_attack_receiver.index.TryGetValue (col.id(), out m_attack_receiver A) && !HittedCharacter.Contains (A) && A.ma.Role.Side != origin.Role.Side )
+            { 
+                Reaction.Clash ( origin.mar.mr, A.mr, new Force( ForceType.slash, 0, col.contacts[0].point ) );
+                HittedCharacter.Add (A);
+            }
         }
 
         void Main ()

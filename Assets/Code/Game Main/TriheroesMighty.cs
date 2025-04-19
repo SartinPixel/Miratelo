@@ -14,15 +14,19 @@ namespace Triheroes.Code
         {
             // scene hardcoded system
             gameObject.AddComponent <GlobalAI> ();
+            Reaction.LoadSpectres ();
 
             // scene hardcoded pool
             d_trajectile.InitPool (32);
             d_slash_attack.InitPool (32);
+            d_sfx.InitPool (16);
 
             // scene hardcoded object
              sp_slash = Loader.LoadIntoScene <SpectreAbs> ( "sp/sp_slash" );
 
             // scene hardcoded index module
+            m_reactable.InitIndex ();
+            m_attack_receiver.InitIndex ();
             m_trajectile_alert.InitIndex ();
 
             Systems = new List<CoreSystemBase>()
@@ -48,7 +52,10 @@ namespace Triheroes.Code
                 new s_move (),
 
                 // character graphic and animation event
-                new s_skin ()
+                new s_skin (),
+
+                // audio
+                new d_sfx.s_sfx ()
             };
         }
     }

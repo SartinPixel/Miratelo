@@ -11,6 +11,9 @@ namespace Triheroes.Code
         public m_skin ms;
         [Depend]
         public m_dimension md;
+        // TO DO remove this, some actor does not need to be attackable, this is just for test
+        [Depend]
+        public m_attack_receiver mar;
 
         public m_actor target {get; private set;}
         public Role Role;

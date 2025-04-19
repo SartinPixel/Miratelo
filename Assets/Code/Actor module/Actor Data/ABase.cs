@@ -14,6 +14,7 @@ namespace Triheroes.Code
         public ASkin Skin;
         public bool HumanFootIk = true;
         public Weapon [] AttachedWeapon;
+        public ObjType CharacterObjType;
         
         [Header ("Actor Settings")]
         public Role Role;
