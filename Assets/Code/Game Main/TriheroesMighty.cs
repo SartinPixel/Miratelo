@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Pixify;
@@ -8,6 +7,9 @@ namespace Triheroes.Code
 {
     public class TriheroesMighty : CoreEngine
     {
+        // TODO find another way to hardcode slash
+        public static SpectreAbs sp_slash;
+
         protected override void CreateSystems(out List<CoreSystemBase> Systems)
         {
             // scene hardcoded system
@@ -15,6 +17,10 @@ namespace Triheroes.Code
 
             // scene hardcoded pool
             d_trajectile.InitPool (32);
+            d_slash_attack.InitPool (32);
+
+            // scene hardcoded object
+             sp_slash = Loader.LoadIntoScene <SpectreAbs> ( "sp/sp_slash" );
 
             Systems = new List<CoreSystemBase>()
             {
@@ -29,6 +35,7 @@ namespace Triheroes.Code
                 new s_state_player (),
 
                 // active attacks
+                new d_slash_attack.s_slash_attack (),
                 new d_trajectile.s_trajectile (),
 
                 // character physic

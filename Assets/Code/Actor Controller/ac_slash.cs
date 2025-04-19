@@ -52,7 +52,9 @@ namespace Triheroes.Code
         }
 
         void Slash ()
-        {}
+        {
+            d_slash_attack.Fire ( msu.Weapon.transform.position, msu.Weapon.transform.rotation, msu.Weapon.slashSize );
+        }
 
         void ComboEnd ()
         {
