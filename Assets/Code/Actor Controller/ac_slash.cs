@@ -7,7 +7,6 @@ namespace Triheroes.Code
 {
     public class ac_slash : action
     {
-        static readonly SuperKey[] SlashKeys = { AnimationKey.slash_0, AnimationKey.slash_1, AnimationKey.slash_2 };
 
         [Depend]
         m_sword_user msu;
@@ -41,7 +40,7 @@ namespace Triheroes.Code
             if (!msu.on)
             Debug.LogError ("this character is trying to play slash animation on a character that is not using sword");
 
-            ms.PlayState ( 0, SlashKeys [id] , 0.1f, ComboEnd, null, Slash );
+            ms.PlayState ( 0, m_sword_user.SlashKeys [id] , 0.1f, ComboEnd, null, Slash );
             msu.state = StateKey.slash;
             currentSlashId = id;
         }
@@ -53,7 +52,7 @@ namespace Triheroes.Code
 
         void Slash ()
         {
-            d_slash_attack.Fire ( msu.Weapon.transform.position, msu.Weapon.transform.rotation, msu.Weapon.slashSize );
+            d_slash_attack.Fire ( ms.Coord.position + Vecteur.LDir ( ms.RotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.RotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
         }
 
         void ComboEnd ()
