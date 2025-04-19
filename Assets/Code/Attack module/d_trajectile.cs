@@ -62,7 +62,7 @@ namespace Triheroes.Code
             timeLeft -= Time.deltaTime;
             if (timeLeft <= 0)
             {
-                DePiow(this);
+                DeFire(this);
                 return;
             }
         }
