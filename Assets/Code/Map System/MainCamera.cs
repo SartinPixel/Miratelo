@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
+    //TODO: not use monobehavior for main camera, use character module instead
+    // monobehavior for fast testing purpose only
     public class MainCamera : MonoBehaviour
     {
         public static MainCamera o;

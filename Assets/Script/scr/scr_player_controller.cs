@@ -42,7 +42,12 @@ public class scr_player_controller : ScriptInit
 
         r = new parallel(
                 new pc_active_master_controller(),
-                pc_normal_move,
+                new parallel (
+                    new guard ( IF ( new ac_have_target () ),
+                                DO ( new parallel ( pc_lateral_move, new ac_look_at_target() ) ) ),
+                    new guard ( IF ( NOT (new ac_have_target ()) ),
+                                DO ( pc_normal_move ) )
+                ),
                 pc_jump,
                 pc_dash,
                 pc_draw,
