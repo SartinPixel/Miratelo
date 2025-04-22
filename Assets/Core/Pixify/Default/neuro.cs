@@ -53,8 +53,8 @@ namespace Pixify
 
         protected override void Abort()
         {
-            if (o[0].on)
-                o[0].iAbort();
+            if (o[ptr].on)   
+            o[ptr].iAbort();
         }
     }
 
