@@ -27,5 +27,7 @@ public class scr_enemy_test : ScriptInit
             );
 
         scriptHolder.Add ( new SuperKey("test"), NewScriptFromRoots (r, r1) );
+        
+        scriptHolder.Add(ControllerKey.hit_normal,HitLibrary.hit_normal ());
     }
 }

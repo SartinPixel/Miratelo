@@ -12,6 +12,8 @@ namespace Triheroes.Code
         public m_actor ma;
         [Depend]
         public m_reactable mr;
+        [Depend]
+        public m_character_controller mcc;
 
         public override void Create1()
         {
@@ -20,7 +22,7 @@ namespace Triheroes.Code
 
         public void Clash ( Force force )
         {
-            Debug.Log ("hit");
+            mcc.OverrideFocus ( ControllerKey.hit_normal );
         }
     }
 }

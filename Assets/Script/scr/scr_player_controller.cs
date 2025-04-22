@@ -74,5 +74,7 @@ public class scr_player_controller : ScriptInit
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
         );
         scriptHolder.Add(new SuperKey("bow"), NewScriptFromRoot(r));
+        
+        scriptHolder.Add(ControllerKey.hit_normal,HitLibrary.hit_normal ());
     }
 }
