@@ -15,7 +15,7 @@ namespace Triheroes.Code
             sp_blow = Loader.LoadIntoScene <Spectre> ("sp/sp_blow");
         }
 
-        public static void Clash (m_reactable from, m_reactable to, Force force)
+        public static void Clash (m_reactable to, Force force)
         {
             if (to.type == ObjType.skin)
             {

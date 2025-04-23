@@ -55,7 +55,7 @@ namespace Triheroes.Code
         {
             if ( m_attack_receiver.index.TryGetValue (col.id(), out m_attack_receiver A) && !HittedCharacter.Contains (A) && A.ma.Role.Side != origin.Role.Side )
             { 
-                Reaction.Clash ( origin.mar.mr, A.mr, new Force( ForceType.slash, 0, col.contacts[0].point ) );
+                Reaction.Clash ( A.mr, new Force( ForceType.slash, 0, col.contacts[0].point ) );
                 HittedCharacter.Add (A);
             }
         }

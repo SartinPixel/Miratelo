@@ -17,7 +17,7 @@ public class scr_enemy_test : ScriptInit
                 new ac_aim_target (),
                 new spawner (
                     new ac_bow_shoot ()
-                ).Set ( true, 3, 2 )
+                ).Set ( true, 2, 1 )
                 )
         );
 

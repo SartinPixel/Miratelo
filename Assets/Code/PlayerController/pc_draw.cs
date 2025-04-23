@@ -9,6 +9,8 @@ namespace Triheroes.Code
     {
         [Depend]
         m_equip me;
+        [Depend]
+        m_arm_state mas;
 
         int ptrWeapon;
         bool pendingSwap;
@@ -26,9 +28,13 @@ namespace Triheroes.Code
                     }
             }
 
-            if ( pendingSwap && me.weaponUser == null)
+            if ( pendingSwap && me.weaponUser == null )
             {
                 pendingSwap = false;
+
+                if ( mas.on )
+                return false;
+
                 ptrWeapon ++;
                 if ( ptrWeapon == me.weapons.Count)
                 ptrWeapon = 0;

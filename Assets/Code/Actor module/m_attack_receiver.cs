@@ -14,6 +14,8 @@ namespace Triheroes.Code
         public m_reactable mr;
         [Depend]
         public m_character_controller mcc;
+        [Depend]
+        public m_arm_state mas;
         
         public ac_hit ah;
 
@@ -25,7 +27,9 @@ namespace Triheroes.Code
 
         public void Clash ( Force force )
         {
-            mcc.OverrideFocus ( ControllerKey.hit_normal );
+            if ( mas.SetState ( ah ) )
+            mas.Aquire (this);
+            //mcc.OverrideFocus ( ControllerKey.hit_normal );
         }
     }
 }

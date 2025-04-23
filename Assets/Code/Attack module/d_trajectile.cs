@@ -41,13 +41,12 @@ namespace Triheroes.Code
             if (Physics.Raycast (position, Vecteur.Forward (rotation), out RaycastHit Hit, spd, Vecteur.SolidCharacterAttack ))
             {
                 position += Vecteur.Forward (rotation) * Hit.distance;
-
-                // DOTO attack receiving
-                /*if ( m_attack_receiver.index.TryGetValue ( Hit.collider.id(), out m_attack_receiver A ) )
+                if ( m_attack_receiver.index.TryGetValue ( Hit.collider.id(), out m_attack_receiver A ) )
                 {
-                    DePiow (this);
+                    Reaction.Clash ( A.mr, new Force ( ForceType.perce, 0, position ) );
+                    DeFire (this);
                     return;
-                }*/
+                }
             }
             else
             position += Vecteur.Forward (rotation) * spd;
