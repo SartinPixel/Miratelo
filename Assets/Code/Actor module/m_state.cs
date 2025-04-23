@@ -8,7 +8,8 @@ namespace Triheroes.Code
 {
     public class m_state_player : core
     {
-        public action state {private set; get;}
+        public action state { private set; get; }
+        bool CanAbort = true;
 
         /// <summary>
         /// aquire state player, don't forget to set a state before
@@ -16,48 +17,64 @@ namespace Triheroes.Code
         protected sealed override void OnAquire()
         {
             if (!state.on)
-            state.iStart ();
+                state.iStart();
             else
             {
-            SelfFree ();
-            throw new InvalidOperationException("stateplayer cannot start a live node");
+                SelfFree();
+                throw new InvalidOperationException("stateplayer cannot start a live node");
             }
         }
 
         protected sealed override void OnFree()
         {
             if (state.on)
-            state.iAbort ();
+                state.iAbort();
+            CanAbort = false;
         }
 
-        public void Main ()
+        public void Main()
         {
             if (state.on)
-            state.iExecute ();
+                state.iExecute();
             else
-            SelfFree ();
+                SelfFree();
         }
 
-        public void SetState (action state)
+        /// <summary>
+        /// set a state before aquiring
+        /// </summary>
+        /// <param name="state"></param>
+        public bool SetState(action state, bool canAbort = false)
         {
-            if (this.state != null && this.state.on)
+            if (on)
             {
-            this.state.iAbort ();
-            state.iStart ();
+                if (CanAbort)
+                {
+                    SelfAbort();
+                    this.state = state;
+                    CanAbort = canAbort;
+                    return true;
+                }
+                return false;
             }
-            this.state = state;
+            else
+            {
+                this.state = state;
+                CanAbort = canAbort;
+                return true;
+            }
         }
     }
 
     [RegisterAsBase]
     public class m_arm_state : m_state_player
-    {}
+    { }
 
-    public class s_state_player : CoreSystem <m_state_player>
+    public class s_state_player : CoreSystem<m_state_player>
     {
         protected override void Main(m_state_player o)
         {
-            o.Main ();
+            o.Main();
         }
     }
 
@@ -66,32 +83,32 @@ namespace Triheroes.Code
 
         action root;
         public action nextState;
-        public state_switcher ( params action[] o )
+        public state_switcher(params action[] o)
         {
             this.o = o;
-            root = o [0];
+            root = o[0];
             nextState = root;
         }
 
         protected sealed override void BeginStep()
         {
-            root.iStart ();
+            root.iStart();
         }
 
         protected sealed override bool Step()
         {
             if (root.on)
-            root.iExecute ();
+                root.iExecute();
 
             if (!root.on)
             {
-                if ( root != nextState)
+                if (root != nextState)
                 {
                     root = nextState;
-                    root.iStart ();
+                    root.iStart();
                 }
                 else
-                root.iStart ();
+                    root.iStart();
             }
 
             return false;
@@ -100,7 +117,7 @@ namespace Triheroes.Code
         protected sealed override void Abort()
         {
             if (root.on)
-            root.iAbort ();
+                root.iAbort();
         }
     }
 

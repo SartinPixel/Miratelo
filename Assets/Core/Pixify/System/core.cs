@@ -27,16 +27,34 @@ namespace Pixify
         {
             if (on)
             {
-                if (host is ICoreReceptor h)
+                if (host is ICoreFeedbackSimple h)
                 {
                 Free (host);
-                h.SelfFreed (this);
+                h.AquiredNodeStopped (this);
+                h.AquiredNodeFreed (this);
                 }
                 else
                 Free (host);
             }
             else
             throw new InvalidOperationException("Self free of inaquired node");
+        }
+
+        protected void SelfAbort ()
+        {
+            if (on)
+            {
+                if (host is ICoreFeedback h)
+                {
+                Free (host);
+                h.AquiredNodeAborted (this);
+                h.AquiredNodeFreed (this);
+                }
+                else
+                Free (host);
+            }
+            else
+            throw new InvalidOperationException("Self Abort of inaquired node");
         }
 
         protected virtual void OnAquire () {}
@@ -55,8 +73,14 @@ namespace Pixify
         }
     }
 
-    public interface ICoreReceptor
+    public interface ICoreFeedbackSimple
     {
-        public void SelfFreed ( node AquiredNode );
+        public void AquiredNodeFreed ( node AquiredNode );
+        public void AquiredNodeStopped ( node AquiredNode );
+    }
+
+    public interface ICoreFeedback : ICoreFeedbackSimple
+    {
+        public void AquiredNodeAborted ( node AquiredNode );
     }
 }
