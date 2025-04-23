@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public sealed class m_equip : module, ICoreFeedbackSimple
+    public sealed class m_equip : module, ICoreFeedback
     {
         [Depend]
         m_arm_state mas;
@@ -92,6 +92,16 @@ namespace Triheroes.Code
             StartWeaponUser ();
             else if (mas.state == crwa)
             ReturnWeaponDone ();
+            }
+        }
+
+        
+        public void AquiredNodeAborted(node AquiredNode)
+        {
+            if (AquiredNode == mas)
+            {
+            if (mas.state == cdwa)
+            ptrWeapon = -1;
             }
         }
 
