@@ -172,6 +172,11 @@ MonoBehaviour:
     Duration: 0.8333334
     EvPoint:
     - 0.050630823
+  - Key:
+      value: -202585826
+      keyName: hitu
+    Duration: 0.6666667
+    EvPoint: []
   SerializedExtStates:
   - Key:
       value: -1086562103

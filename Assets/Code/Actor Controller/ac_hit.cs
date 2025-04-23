@@ -23,6 +23,16 @@ namespace Triheroes.Code
         {
             mccc.Free (this);
         }
+    }
 
+    public class ac_hit : action
+    {
+        [Depend]
+        m_skin ms;
+
+        protected override void BeginStep()
+        {
+            ms.PlayState (ms.upper, AnimationKey.hitu, 0.1f, AppendStop);
+        }
     }
 }

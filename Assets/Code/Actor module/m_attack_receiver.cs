@@ -14,10 +14,13 @@ namespace Triheroes.Code
         public m_reactable mr;
         [Depend]
         public m_character_controller mcc;
+        
+        public ac_hit ah;
 
         public override void Create1()
         {
             mr.Clash = Clash;
+            ah = character.ConnectAction ( new ac_hit() );
         }
 
         public void Clash ( Force force )

@@ -32,7 +32,7 @@ namespace Triheroes.Code
             }
             else if ( !mas.on && Player.GetButtonDown (BoutonId.Fire3) )
             {
-                mas.SetState ( mbu.ca );
+                mas.SetState ( mbu.ca, true );
                 mas.Aquire (this);
             }
             return false;

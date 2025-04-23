@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public sealed class m_equip : module, ICoreReceptor
+    public sealed class m_equip : module, ICoreFeedbackSimple
     {
         [Depend]
         m_arm_state mas;
@@ -67,7 +67,7 @@ namespace Triheroes.Code
             if ( weaponUser == null && !mas.on && weapons [id] )
             {
             cdwa.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
-            mas.SetState (cdwa);
+            mas.SetState (cdwa,true);
             mas.Aquire (this);
             ptrWeapon = id;
             }
@@ -78,12 +78,13 @@ namespace Triheroes.Code
             if ( weaponUser != null && !mas.on )
             {
                 crwa.Set (weapons [ptrWeapon].DefaultReturnAnimation);
-                mas.SetState (crwa);
+                mas.SetState (crwa,true);
                 mas.Aquire (this);
             }
         }
 
-        public void SelfFreed(node AquiredNode)
+        
+        public void AquiredNodeStopped(node AquiredNode)
         {
             if (AquiredNode == mas)
             {
@@ -92,6 +93,10 @@ namespace Triheroes.Code
             else if (mas.state == crwa)
             ReturnWeaponDone ();
             }
+        }
+
+        public void AquiredNodeFreed(node AquiredNode)
+        {
         }
 
         void ReturnWeaponDone ()

@@ -41,15 +41,20 @@ namespace Triheroes.Code
         public static readonly SuperKey jump = new SuperKey("jump");
         public static readonly SuperKey jump_left_foot = new SuperKey("jump_left_foot");
         public static readonly SuperKey jump_right_foot = new SuperKey("jump_right_foot");
+
         public static readonly SuperKey hit = new SuperKey("hit");
+        public static readonly SuperKey hitu = new SuperKey ("hitu");
+
         public static readonly SuperKey take_sword = new SuperKey("take_sword");
         public static readonly SuperKey take_bow = new SuperKey("take_bow");
         public static readonly SuperKey return_bow = new SuperKey("return_bow");
         public static readonly SuperKey return_sword = new SuperKey("return_sword");
+
         public static readonly SuperKey dash_forward = new SuperKey("dash_forward");
         public static readonly SuperKey dash_back = new SuperKey("dash_back");
         public static readonly SuperKey dash_left = new SuperKey("dash_left");
         public static readonly SuperKey dash_right = new SuperKey("dash_right");
+
         public static readonly SuperKey slash_0 = new SuperKey("slash_0");
         public static readonly SuperKey slash_1 = new SuperKey("slash_1");
         public static readonly SuperKey slash_2 = new SuperKey("slash_2");
