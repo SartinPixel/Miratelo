@@ -15,6 +15,7 @@ namespace Pixify
         {
             if (!on)
             {
+                stopPending = false;
                 on = true;
                 BeginStep ();
             }
@@ -32,6 +33,7 @@ namespace Pixify
             {
                 Abort ();
                 on = false;
+                stopPending = false;
             }
             else
             throw new InvalidOperationException("cannot abort node that is already stopped");
@@ -46,6 +48,7 @@ namespace Pixify
             {
                 Stop ();
                 on = false;
+                stopPending = false;
             }
             else
             throw new InvalidOperationException("cannot stop node: that is already stopped");
