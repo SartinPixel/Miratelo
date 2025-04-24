@@ -27,6 +27,12 @@ namespace Triheroes.Code
             EndFire ();
         }
 
+        public void block ( Vector3 Normal )
+        {
+            if (on)
+            rotation = Vecteur.RotDirectionQuaternion (Vector3.zero,Normal);
+        }
+
         void Main ()
         {
             ShootCast ();

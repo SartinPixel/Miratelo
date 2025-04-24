@@ -13,10 +13,12 @@ namespace Triheroes.Code
         m_trajectile_alert mta;
 
         ac_slash as1;
+        ac_slash_parry_trajectile aspt;
 
         public override void Create()
         {
             as1 = pmc.character.ConnectAction ( new ac_slash () );
+            aspt = pmc.character.ConnectAction ( new ac_slash_parry_trajectile () );
         }
 
         protected override void BeginStep()
@@ -28,11 +30,20 @@ namespace Triheroes.Code
         {
             if ( Player.GetButtonDown (BoutonId.Fire1) )
                 {
-                if ( !as1.on )
+                if ( pmc.overrideMaster == null )
                 pmc.OverrideMaster (this, as1);
-                else
+                else if (as1.on)
                 as1.ComboAppend ();
                 }
+
+            if ( Player.GetButtonDown (BoutonId.F) )
+            {
+                if ( mta.Alert && pmc.overrideMaster == null )
+                {
+                aspt.SetTrajectile ( mta.incomingTrajectile );
+                pmc.OverrideMaster ( this, aspt );
+                }
+            }
                 
             return false;
         }

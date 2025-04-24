@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class ac_slash : action
+    public sealed class ac_slash : action
     {
-
         [Depend]
         m_sword_user msu;
         [Depend]
@@ -77,6 +76,58 @@ namespace Triheroes.Code
         {
             AppendStop ();
         }
+    }
 
+    public sealed class ac_slash_parry_trajectile : action
+    {
+        [Depend]
+        m_sword_user msu;
+        [Depend]
+        m_skin ms;
+
+        d_trajectile trajectile;
+        public void SetTrajectile ( d_trajectile trajectileToParry )
+        {
+            trajectile = trajectileToParry;
+        }
+
+        protected override void BeginStep()
+        {
+            if ( !msu.on )
+            {
+            AppendStop();
+            return;
+            }
+
+            if ( msu.state == StateKey.zero )
+            Begin ();
+            else
+            Debug.LogError ("this character is trying to parry but the sword_user is not ready");
+        }
+
+        void Begin ()
+        {
+            ms.PlayState ( 0, AnimationKey.parry_0 , 0.1f, AppendStop );
+            msu.state = StateKey.parry_trajectile;
+        }
+
+        protected override bool Step()
+        {
+            if ( trajectile!= null && trajectile.on )
+            {
+                if ( Vector3.Distance ( trajectile.position, msu.Weapon.transform.position ) < ( msu.Weapon.Lenght + ( trajectile.speed * Time.deltaTime ) ) && Mathf.Abs ( Mathf.DeltaAngle ( Vecteur.RotDirectionY ( ms.Coord.position, trajectile.position ), ms.RotY.y ) ) < 90 )
+                {
+                trajectile.block ( Vecteur.LDir ( ms.RotY, Vector3.forward ) );
+                trajectile = null;
+                }
+            }
+            return false;
+        }
+
+        protected override void Stop()
+        {
+            if ( msu.state == StateKey.parry_trajectile )
+            msu.state = StateKey.zero;
+        }
     }
 }
