@@ -14,6 +14,7 @@ namespace Triheroes.Code
         {
             // scene hardcoded system
             gameObject.AddComponent <GlobalAI> ();
+            gameObject.AddComponent <Vecteur> ();
             Reaction.LoadSpectres ();
 
             // scene hardcoded pool
