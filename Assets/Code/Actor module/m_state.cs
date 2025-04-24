@@ -66,6 +66,7 @@ namespace Triheroes.Code
         }
     }
 
+    // TODO about normal state, need to find way to not allow arm state to be aquired with some specific normal state
     [RegisterAsBase]
     public class m_arm_state : m_state_player
     { }

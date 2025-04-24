@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
+    // TODO IMPORTANT don't allow player to attack while drawing weapon
     public sealed class m_equip : module, ICoreFeedback
     {
         [Depend]
