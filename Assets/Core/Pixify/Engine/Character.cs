@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Pixify
 {
-
     // Gameobject with an unique index module dictionary
     public class Character : MonoBehaviour
     {
@@ -124,7 +123,5 @@ namespace Pixify
                 mcc.Aquire ( new Null() );
             }
         }
-
     }
-
 }

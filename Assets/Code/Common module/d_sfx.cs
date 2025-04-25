@@ -5,7 +5,6 @@ using Pixify;
 
 namespace Triheroes.Code
 {
-
     public class d_sfx : vDot<d_sfx>
     {
         AudioSource Au;
@@ -45,7 +44,5 @@ namespace Triheroes.Code
         {
             Au.gameObject.SetActive(false);
         }
-
     }
-
 }

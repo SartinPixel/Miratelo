@@ -15,7 +15,6 @@ namespace Triheroes.Code
             type = character.GetComponent <ABase>().CharacterObjType;
         }
     }
-        
+    
     public enum ObjType { skin, metal, wood }
 }
-
