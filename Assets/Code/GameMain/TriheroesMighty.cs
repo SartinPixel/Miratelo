@@ -55,6 +55,9 @@ namespace Triheroes.Code
                 // character graphic and animation event
                 new s_skin (),
 
+                // camera
+                new s_camera_controller (),
+
                 // audio
                 new d_sfx.s_sfx ()
             };

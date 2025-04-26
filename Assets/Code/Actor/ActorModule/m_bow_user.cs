@@ -13,12 +13,12 @@ namespace Triheroes.Code
 
         public c_aim ca {private set; get;}
 
-        public Vector3 RotY;
+        public Vector3 rotY;
         public SuperKey state = StateKey.zero;
 
         protected override void Create1()
         {
-            ca = character.ConnectAction (new c_aim());
+            ca = character.ConnectNode (new c_aim());
         }
         protected override void OnAquire1()
         {

@@ -48,12 +48,12 @@ namespace Triheroes.Code
             mbu.state = StateKey.aim;
             ms.HoldState ( ms.upper, AnimationKey.begin_aim , 0.1f);
             mspb.isRotatingWithBow = m_skin_produceral_bow.isRotatingWithBowState.running;
-            Aim ( ms.RotY );
+            Aim ( ms.rotY );
         }
 
         public void Aim ( Vector3 Rotation )
         {
-            mbu.RotY = Rotation;
+            mbu.rotY = Rotation;
             mspb.TargetRotY = Rotation;
         }
 
@@ -65,7 +65,7 @@ namespace Triheroes.Code
 
         void Shoot ()
         {
-            d_trajectile.Fire ( mbu.Weapon.ArrowPaper, mbu.Weapon.BowString.position,Quaternion.Euler (mbu.RotY), mbu.Weapon.Speed );
+            d_trajectile.Fire ( mbu.Weapon.ArrowPaper, mbu.Weapon.BowString.position,Quaternion.Euler (mbu.rotY), mbu.Weapon.Speed );
             mspb.isRotatingWithBow = m_skin_produceral_bow.isRotatingWithBowState.hold;
             isShooting = false;
         }
@@ -83,7 +83,7 @@ namespace Triheroes.Code
         {
             if (on)
             {
-                if ( mscch.cgm.state != StateKey.idle || Mathf.Abs (Mathf.DeltaAngle(TargetRotDirection.y , ms.RotY.y)) > 20 )
+                if ( mscch.cgm.state != StateKey.idle || Mathf.Abs (Mathf.DeltaAngle(TargetRotDirection.y , ms.rotY.y)) > 20 )
                 mscch.cgm.rotDir = Vecteur.LDir ( Vector3.up * TargetRotDirection.y, Vector3.forward);
             }
         }

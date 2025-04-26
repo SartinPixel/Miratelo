@@ -76,7 +76,7 @@ namespace Pixify
             return n;
         }
 
-        public T ConnectAction <T> (T a) where T:action
+        public T ConnectNode <T> (T a) where T:node
         {
             if (!nodes.Contains (a))
             {
@@ -89,12 +89,12 @@ namespace Pixify
         /// <summary>
         /// connect and initialize this root and its tree with the character
         /// </summary>
-        public action [] ConnectRoot (neuro r)
+        public neuro ConnectRoot (neuro r)
         {
             List<action> actions = ScriptWriter.RootToTree ( r );
             foreach ( var n in actions )
             ConnectAction (n);
-            return actions.ToArray();
+            return r;
         }
 
         void Awake()

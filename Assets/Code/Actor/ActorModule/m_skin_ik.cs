@@ -87,7 +87,7 @@ namespace Triheroes.Code
                 Rotrik = Quaternion.FromToRotation(Foot[1].forward, hit.normal) * Foot[1].rotation;
             }
 
-            ms.PosY = new Vector3(0, Mathf.Min(PosYl * S.iklx, PosYr * S.ikrx, 0), 0);
+            ms.posY = new Vector3(0, Mathf.Min(PosYl * S.iklx, PosYr * S.ikrx, 0), 0);
         }
 
         void CheckCanContinueIk()
@@ -95,7 +95,7 @@ namespace Triheroes.Code
             // if not on ground, disable Ik
             if (!mgd.onGround)
             {
-                ms.PosY = Vector3.zero;
+                ms.posY = Vector3.zero;
                 S.ikOn = false;
             }
         }

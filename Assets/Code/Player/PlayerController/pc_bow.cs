@@ -17,7 +17,7 @@ namespace Triheroes.Code
         {
             if (mbu.ca.on)
             {
-                Vector3 RotDirection = Vecteur.RotDirection ( mbu.Weapon.BowString.position, MainCamera.PointScreenCenter( mbu.character.transform ) );
+                Vector3 RotDirection = Vecteur.RotDirection ( mbu.Weapon.BowString.position, m_camera.o.PointScreenCenter( mbu.character.transform ) );
                 mbu.ca.Aim ( RotDirection );
                 
                 mbu.ca.TurnToTargetRot ( RotDirection );

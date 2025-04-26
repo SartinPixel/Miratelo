@@ -22,7 +22,7 @@ namespace Triheroes.Code
         public override void Create1()
         {
             mr.Clash = Clash;
-            ah = character.ConnectAction ( new ac_hit() );
+            ah = character.ConnectNode ( new ac_hit() );
         }
 
         public void Clash ( Force force )

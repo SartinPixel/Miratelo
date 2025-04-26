@@ -17,8 +17,8 @@ namespace Triheroes.Code
 
         public override void Create()
         {
-            as1 = pmc.character.ConnectAction ( new ac_slash () );
-            aspt = pmc.character.ConnectAction ( new ac_slash_parry_trajectile () );
+            as1 = pmc.character.ConnectNode ( new ac_slash () );
+            aspt = pmc.character.ConnectNode ( new ac_slash_parry_trajectile () );
         }
 
         protected override void BeginStep()

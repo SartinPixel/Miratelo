@@ -40,7 +40,7 @@ namespace Triheroes.Code
             mas.SetState ( mbu.ca );
             mas.Aquire (this);
 
-            rotDir = Quaternion.Euler(ms.RotY);
+            rotDir = Quaternion.Euler(ms.rotY);
         }
 
         protected override bool Step()

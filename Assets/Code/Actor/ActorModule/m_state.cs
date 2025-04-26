@@ -115,6 +115,13 @@ namespace Triheroes.Code
             return false;
         }
 
+        public void SwitchTo ( action nextState )
+        {
+            if (root.on)
+            root.iAbort ();
+            this.nextState = nextState;
+        }
+
         protected sealed override void Abort()
         {
             if (root.on)

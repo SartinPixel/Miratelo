@@ -9,7 +9,7 @@ namespace Pixify
 {
     public class CharacterData : MonoBehaviour
     {   
-        void Update()
+        public void Update()
         {
         Destroy (this);
         }

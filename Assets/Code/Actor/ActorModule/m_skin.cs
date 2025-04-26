@@ -12,8 +12,8 @@ namespace Triheroes.Code
         public Animator Ani;
         AniExt AniExt;
 
-        public Vector3 RotY;
-        public Vector3 PosY;
+        public Vector3 rotY;
+        public Vector3 posY;
 
         // animation player per state
         Player[] Players;

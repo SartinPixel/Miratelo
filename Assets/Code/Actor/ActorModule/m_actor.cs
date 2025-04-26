@@ -48,7 +48,7 @@ namespace Triheroes.Code
         public m_actor GetNearestFacedFoe ( float distance )
         {
             List<m_actor> foe = GlobalAI.o.GetFoes(Role);
-            foe.Sort( new SortDistanceA<m_actor>(ms.RotY.y, ms.Coord.position, distance) );
+            foe.Sort( new SortDistanceA<m_actor>(ms.rotY.y, ms.Coord.position, distance) );
 
             if (foe.Count > 0 && Vector3.Distance(ms.Coord.position, foe[0].ms.Coord.position) < distance)
                 return foe[0];

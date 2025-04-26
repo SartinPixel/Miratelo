@@ -10,10 +10,14 @@ namespace Triheroes.Code
 
         [Depend]
         pm_master_controller pmc;
+        [Depend]
+        m_actor ma;
 
         protected override void BeginStep()
         {
             pmc.Aquire (this);
+            //TODO remove this and let gamemaster manage camera actors
+            m_camera.o.mcts.C = ma;
         }
 
         protected override bool Step()

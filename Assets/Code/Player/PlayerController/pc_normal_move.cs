@@ -16,6 +16,7 @@ namespace Triheroes.Code
 
         protected override void BeginStep ()
         {
+            m_camera.o.mcts.ChangeToTps ();
             pmc.SetDefaultMaster (this, mscch.ss);
         }
 
@@ -23,7 +24,7 @@ namespace Triheroes.Code
         {
             Vector3 InputAxis;
             InputAxis = Player.GetAxis3();
-            InputAxis = Vecteur.LDir (new Vector3(0, MainCamera.o.RotY.y, 0),InputAxis) * 6f;
+            InputAxis = Vecteur.LDir (new Vector3(0, m_camera.o.mcts.rotY.y, 0),InputAxis) * 6f;
             if (mgd.onGround)
             mscch.cgm.Walk ( InputAxis, Player.GetButton (BoutonId.Fire2) ? WalkFactor.sprint : Input.GetKey (KeyCode.X) ? WalkFactor.walk : WalkFactor.run );
             else

@@ -29,8 +29,8 @@ namespace Triheroes.Code
         {
             InitialSetting ();
 
-            cdwa = character.ConnectAction ( new c_draw_weapon_animation() );
-            crwa = character.ConnectAction ( new c_return_weapon_animation() );
+            cdwa = character.ConnectNode ( new c_draw_weapon_animation() );
+            crwa = character.ConnectNode ( new c_return_weapon_animation() );
         }
 
         void AquireWeapon ( Weapon weapon )

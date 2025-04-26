@@ -29,7 +29,7 @@ namespace Triheroes.Code
         {
             walkDir = Vector3.zero;
             walkLatDir = Vector3.zero;
-            rotDir = Vecteur.LDir ( ms.RotY, Vector3.forward ) ;
+            rotDir = Vecteur.LDir ( ms.rotY, Vector3.forward ) ;
             ToIdle ();
             mccc.Aquire (this);
         }
@@ -67,13 +67,13 @@ namespace Triheroes.Code
                 RotIntent = Vecteur.RotDirectionY (Vector3.zero, rotDir);
 
             // brake turn animation if rotation difference is to high // and is sprinting
-            if (state == StateKey.sprint && Mathf.Abs(Mathf.DeltaAngle(ms.RotY.y, RotIntent)) > 120)
+            if (state == StateKey.sprint && Mathf.Abs(Mathf.DeltaAngle(ms.rotY.y, RotIntent)) > 120)
                 RotationBrake();
 
-            if (state == StateKey.brake && Mathf.Abs(Mathf.DeltaAngle(ms.RotY.y, RotIntent)) > 120)
+            if (state == StateKey.brake && Mathf.Abs(Mathf.DeltaAngle(ms.rotY.y, RotIntent)) > 120)
                 RotationBrake();
 
-            ms.RotY = new Vector3(0, Mathf.MoveTowardsAngle(ms.RotY.y, RotIntent, Time.deltaTime * 1080), 0);
+            ms.rotY = new Vector3(0, Mathf.MoveTowardsAngle(ms.rotY.y, RotIntent, Time.deltaTime * 720), 0);
         }
 
         void WalkAnimation()
@@ -111,7 +111,7 @@ namespace Triheroes.Code
             // lateral movement => idle
             else if ( state == StateKey.walk_lateral )
             {
-                Vector3 relativeDir = Vecteur.LDir( new Vector3(0, 360 - ms.RotY.y, 0), walkLatDir ).normalized;
+                Vector3 relativeDir = Vecteur.LDir( new Vector3(0, 360 - ms.rotY.y, 0), walkLatDir ).normalized;
                 SetAnimationDirectionFloat(relativeDir.x, relativeDir.z);
 
                 if (walkLatDir.sqrMagnitude == 0)

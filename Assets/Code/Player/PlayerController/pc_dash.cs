@@ -15,7 +15,7 @@ namespace Triheroes.Code
         ac_dash ad;
         public override void Create()
         {
-            ad = pmc.character.ConnectAction ( new ac_dash (direction.forward) );
+            ad = pmc.character.ConnectNode ( new ac_dash (direction.forward) );
         }
 
         protected override bool Step()

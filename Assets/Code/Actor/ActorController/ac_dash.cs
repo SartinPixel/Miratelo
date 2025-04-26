@@ -28,7 +28,7 @@ namespace Triheroes.Code
 
             ms.PlayState (0, DashAnimation (dashDirection),0.1f, DashEnd);
             ms.SkinMove = true;
-            ms.SkinDir = Vecteur.LDir (ms.RotY, Direction (dashDirection));
+            ms.SkinDir = Vecteur.LDir (ms.rotY, Direction (dashDirection));
         }
 
         protected override void Stop()

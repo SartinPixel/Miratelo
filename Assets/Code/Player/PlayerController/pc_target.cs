@@ -22,7 +22,13 @@ namespace Triheroes.Code
             {
                 ma.UnlockTarget ();
                 ma.LockATarget ( ma.GetNearestFacedFoe ( Distance ) );
+                
+                if ( ma.target != null )
+                m_camera.o.mcts.ChangeToTarget ();
             }
+            
+            if (Player.GetButtonDown (BoutonId.E))
+            ma.UnlockTarget ();
             return false;
         }
     }
