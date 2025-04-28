@@ -16,12 +16,6 @@ namespace Triheroes.Code
         public override void Default()
         {
             UpdateFromC ();
-            
-            if (c.C.target == null)
-            {
-            rotY = c.C.ms.rotY;
-            return;
-            }
 
             CalculateOffest ();
             rotYToTarget = Vecteur.RotDirection (mpos, tpos);
@@ -30,12 +24,6 @@ namespace Triheroes.Code
 
         public override void Update()
         {
-            if (c.C.target == null)
-            {
-                c.ChangeToTps ();
-                return;
-            }
-
             CalculateOffest ();
 
             // rotate offset according to mouse

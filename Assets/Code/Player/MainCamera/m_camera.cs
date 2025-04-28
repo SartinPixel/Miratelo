@@ -87,35 +87,74 @@ namespace Triheroes.Code
         public float distance { get; private set; }
 
         pc_camera_tps_controller state;
-        m_camera_tps_transition mctt;
-        tps_camera tc;
-        tps_camera_target tct;
-        tps_camera_look_front tclf;
+        m_camera_tps_transition StateTransition;
+        bool inTransition;
+
+        public tps_camera tps;
+        public tps_camera_target target;
 
         public override void Create()
         {
-            mctt = character.ConnectNode( new m_camera_tps_transition() );
-            tc = character.ConnectNode( new tps_camera() );
-            tct = character.ConnectNode( new tps_camera_target() );
-            tclf = character.ConnectNode ( new tps_camera_look_front() );
-            SetState(tc);
+            StateTransition = character.ConnectNode(new m_camera_tps_transition());
+
+            tps = character.ConnectNode(new tps_camera());
+            target = character.ConnectNode(new tps_camera_target());
+            state = tps; tps.Default();
         }
 
-        void SetState(pc_camera_tps_controller State)
+        void SetState(pc_camera_tps_controller newState)
         {
-            state = State;
-            state.Default();
+            if (newState != state)
+            {
+                state = newState;
+                StateTransition.SetNext(newState);
+                StateTransition.Default();
+                inTransition = true;
+            }
         }
 
         public sealed override void Main()
         {
-            state.Update();
+            CameraController();
+            UpdateState();
+            SetTpsCamera();
+        }
 
-            rotY = state.rotY;
-            offset = state.offset;
-            distance = state.distance;
-            height = state.height;
+        void CameraController()
+        {
 
+            if (C.target != null)
+            {
+                SetState(target);
+                return;
+            }
+
+            SetState(tps);
+
+        }
+
+        void UpdateState()
+        {
+            if (!inTransition)
+            {
+                state.Update();
+                rotY = state.rotY;
+                offset = state.offset;
+                distance = state.distance;
+                height = state.height;
+            }
+            else
+            {
+                StateTransition.Update();
+                rotY = StateTransition.rotY;
+                offset = StateTransition.offset;
+                distance = StateTransition.distance;
+                height = StateTransition.height;
+            }
+        }
+
+        void SetTpsCamera()
+        {
             float RayDistance = distance;
 
             if (Physics.Raycast(mc.Coord.position, mc.CameraPivot.TransformDirection(Vector3.back), out RaycastHit hit, distance, Vecteur.Solid))
@@ -125,26 +164,6 @@ namespace Triheroes.Code
             mc.Coord.rotation = Quaternion.Euler(rotY);
             mc.CameraPivot.transform.localPosition = Vector3.back * RayDistance;
         }
-
-        public void ChangeToTarget()
-        {
-            tct.rotYOffset = Vector3.zero;
-            mctt.SetNext(tct);
-            SetState(mctt);
-        }
-
-        public void ChangeToTps()
-        {
-            mctt.SetNext(tc);
-            SetState(mctt);
-        }
-
-        public void ChangeToLookFront()
-        {
-            mctt.SetNext(tc);
-            SetState(mctt);
-        }
-
 
         class m_camera_tps_transition : pc_camera_tps_controller
         {
@@ -172,13 +191,13 @@ namespace Triheroes.Code
                 inHeight = c.height;
                 inDistance = c.distance;
 
-                nextState.Default ();
+                nextState.Default();
             }
 
             float t = 0;
             public override void Update()
             {
-                nextState.Update ();
+                nextState.Update();
 
                 t = Mathf.Lerp(t, 1, .1f);
 
@@ -186,10 +205,10 @@ namespace Triheroes.Code
                 rotY.x = Mathf.LerpAngle(inRotY.x, nextState.rotY.x, t);
                 height = Mathf.Lerp(inHeight, nextState.height, t);
                 distance = Mathf.Lerp(inDistance, nextState.distance, t);
-                offset = Vector3.Lerp ( inOffset, nextState.offset, t );
+                offset = Vector3.Lerp(inOffset, nextState.offset, t);
 
                 if (t >= .99f)
-                c.SetState ( nextState );
+                    c.inTransition = false;
 
                 return;
             }

@@ -16,7 +16,6 @@ namespace Triheroes.Code
 
         protected override void BeginStep ()
         {
-            m_camera.o.mcts.ChangeToTps ();
             pmc.SetDefaultMaster (this, mscch.ss);
         }
 

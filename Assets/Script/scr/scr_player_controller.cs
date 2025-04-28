@@ -15,7 +15,6 @@ public class scr_player_controller : ScriptInit
         var pc_target = new pc_target ( 10 );
         var pc_normal_move = new pc_normal_move ();
         var pc_lateral_move = new pc_lateral_move ();
-        var pc_camera_forward = new pc_camera_forward();
 
 
         var r = new parallel(
@@ -25,7 +24,6 @@ public class scr_player_controller : ScriptInit
                     pc_draw,
                     pc_dash,
                     pc_target,
-                    pc_camera_forward,
                     new guard(  IF (new ac_has_active_weapon()),
                                 DO (new change_focus(new SuperKey("equip_selector"))) )
         );
@@ -54,7 +52,6 @@ public class scr_player_controller : ScriptInit
                 pc_dash,
                 pc_draw,
                 pc_target,
-                pc_camera_forward,
                 new pc_sword(),
                 new guard ( IF (NOT(new ac_check_active_weapon_type (WeaponType.Sword))),
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
@@ -72,7 +69,6 @@ public class scr_player_controller : ScriptInit
                 pc_jump,
                 pc_draw,
                 pc_target,
-                pc_camera_forward,
                 new pc_bow(),
                 new guard ( IF (NOT(new ac_check_active_weapon_type (WeaponType.Bow))),
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
