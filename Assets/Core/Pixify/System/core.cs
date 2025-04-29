@@ -6,16 +6,20 @@ namespace Pixify
 {
     public abstract class core : module
     {
-        public bool on {get; private set;}
+        bool _on;
+        protected bool enabled;
+        public bool on { get {return enabled && _on;} }
+        public bool aquired => on;
 
         public core () { CoreEngine.o.Register (this); }
 
         node host;
         public void Aquire (node host)
         {
-            if (!on)
+            if (!_on)
             {
-            on = true;
+            _on = true;
+            enabled = true;
             this.host = host;
             OnAquire ();
             }
@@ -25,7 +29,7 @@ namespace Pixify
 
         protected void SelfFree ()
         {
-            if (on)
+            if (_on)
             {
                 if (host is ICoreFeedbackSimple h)
                 {
@@ -42,7 +46,7 @@ namespace Pixify
 
         protected void SelfAbort ()
         {
-            if (on)
+            if (_on)
             {
                 if (host is ICoreFeedback h)
                 {
@@ -62,9 +66,10 @@ namespace Pixify
 
         public void Free (node host)
         {
-            if ( on && this.host == host)
+            if ( _on && this.host == host)
             {
-                on = false;
+                _on = false;
+                enabled = false;
                 OnFree ();
                 this.host = null;
             }
