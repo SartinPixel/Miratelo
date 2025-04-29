@@ -99,7 +99,7 @@ namespace Triheroes.Code
 
             tps = character.ConnectNode(new tps_camera());
             target = character.ConnectNode(new tps_camera_target());
-            state = tps; tps.Default();
+            state = tps;
         }
 
         void SetState(pc_camera_tps_controller newState)
