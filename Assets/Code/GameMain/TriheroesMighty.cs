@@ -58,6 +58,9 @@ namespace Triheroes.Code
                 // camera
                 new s_camera_controller (),
 
+                // tween
+                new s_tween (),
+
                 // audio
                 new d_sfx.s_sfx ()
             };

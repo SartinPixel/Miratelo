@@ -199,6 +199,8 @@ namespace Triheroes.Code
             {
                 nextState.Update();
 
+                // TODO make independent of framerate
+                // TODO use tween
                 t = Mathf.Lerp(t, 1, .1f);
 
                 rotY.y = Mathf.LerpAngle(inRotY.y, nextState.rotY.y, t);

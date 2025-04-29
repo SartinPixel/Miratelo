@@ -13,6 +13,9 @@ namespace Triheroes.Code
         public override void Default()
         {
             UpdateFromC ();
+
+            m_black_bar.o.Push ( 0 );
+
             offset = Vector3.zero;
             lookForward = false;
         }

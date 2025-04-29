@@ -17,6 +17,8 @@ namespace Triheroes.Code
         {
             UpdateFromC ();
 
+            m_black_bar.o.Push ( 32 );
+
             CalculateOffest ();
             rotYToTarget = Vecteur.RotDirection (mpos, tpos);
             rotY = rotYToTarget;
