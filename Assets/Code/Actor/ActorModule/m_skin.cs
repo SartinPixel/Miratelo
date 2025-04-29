@@ -312,7 +312,6 @@ namespace Triheroes.Code
             }
         }
         #endregion
-
     }
 
 }
