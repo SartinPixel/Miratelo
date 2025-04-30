@@ -13,6 +13,8 @@ namespace Triheroes.Code
 
     public abstract class m_weapon_user<T> : m_weapon_user where T : Weapon
     {
+        [Depend]
+        public m_actor ma;
 
         [Depend]
         protected m_skin ms;

@@ -26,7 +26,7 @@ namespace Triheroes.Code
              sp_slash = Loader.LoadIntoScene <SpectreAbs> ( "sp/sp_slash" );
 
             // scene hardcoded index module
-            m_reactable.InitIndex ();
+            m_reaction_receiver.InitIndex ();
             m_attack_receiver.InitIndex ();
             m_trajectile_alert.InitIndex ();
 

@@ -53,7 +53,7 @@ namespace Triheroes.Code
 
         void Slash ()
         {
-            d_slash_attack.Fire ( ma, ms.Coord.position + Vecteur.LDir ( ms.rotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.rotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
+            d_slash_attack.Fire ( msu, ms.Coord.position + Vecteur.LDir ( ms.rotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.rotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
         }
 
         void ComboEnd ()
@@ -117,7 +117,7 @@ namespace Triheroes.Code
             {
                 if ( Vector3.Distance ( trajectile.position, msu.Weapon.transform.position ) < ( msu.Weapon.Lenght + ( trajectile.speed * Time.deltaTime ) ) && Mathf.Abs ( Mathf.DeltaAngle ( Vecteur.RotDirectionY ( ms.Coord.position, trajectile.position ), ms.rotY.y ) ) < 90 )
                 {
-                trajectile.block ( Vecteur.LDir ( ms.rotY, Vector3.forward ) );
+                Reaction.Clash ( msu.Weapon.mrr , trajectile.mrr, new Force (ForceType.perce_parry,0,trajectile.position,Vecteur.LDir ( ms.rotY, Vector3.forward )) );
                 trajectile = null;
                 }
             }

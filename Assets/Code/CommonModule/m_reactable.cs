@@ -5,16 +5,27 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class m_reactable : indexedmodule <m_reactable>
+    public class m_reaction_receiver : indexedmodule <m_reaction_receiver>
     {
-        public ObjType type;
+        public reactable reactable;
         public Action <Force> Clash;
 
         public override void Create1()
         {
-            type = character.GetComponent <ABase>().CharacterObjType;
+            var type = character.GetComponent <ABase>().CharacterObjType;
+            switch (type)
+            {
+                case ObjType.skin:
+                reactable = new r_skin ();
+                break;
+            }
         }
     }
-    
+
+    public abstract class reactable
+    {
+        public abstract void Clash (Force force, reactable from);
+    }
+
     public enum ObjType { skin, metal, wood }
 }

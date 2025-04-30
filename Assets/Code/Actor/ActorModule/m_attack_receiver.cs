@@ -11,7 +11,7 @@ namespace Triheroes.Code
         [Depend]
         public m_actor ma;
         [Depend]
-        public m_reactable mr;
+        public m_reaction_receiver mrr;
         [Depend]
         public m_character_controller mcc;
         [Depend]
@@ -21,7 +21,7 @@ namespace Triheroes.Code
 
         public override void Create1()
         {
-            mr.Clash = Clash;
+            mrr.Clash = Clash;
             ah = character.ConnectNode ( new ac_hit() );
         }
 

@@ -7,12 +7,19 @@ namespace Triheroes.Code
 {
     public class d_trajectile : vDot <d_trajectile>
     {
-
+        public m_reaction_receiver mrr;
         public float timeLeft;
         public float speed;
         public Vector3 position;
         public Quaternion rotation;
         public DotSkin dotSkin;
+
+        public override void Create()
+        {
+            mrr = new m_reaction_receiver();
+            mrr.reactable = new r_metal ();
+            mrr.Clash += Clash;
+        }
 
         public static void Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed )
         {
@@ -27,10 +34,10 @@ namespace Triheroes.Code
             EndFire ();
         }
 
-        public void block ( Vector3 Normal )
+        void Clash ( Force force )
         {
-            if (on)
-            rotation = Vecteur.RotDirectionQuaternion (Vector3.zero,Normal);
+            if (on && force.type == ForceType.perce_parry )
+            rotation = Vecteur.RotDirectionQuaternion (Vector3.zero,force.Normal);
         }
 
         void Main ()
@@ -49,7 +56,7 @@ namespace Triheroes.Code
                 position += Vecteur.Forward (rotation) * Hit.distance;
                 if ( m_attack_receiver.index.TryGetValue ( Hit.collider.id(), out m_attack_receiver A ) )
                 {
-                    Reaction.Clash ( A.mr, new Force ( ForceType.perce, 0, position ) );
+                    Reaction.Clash ( mrr, A.mrr, new Force ( ForceType.perce, 0, position ) );
                     DeFire (this);
                     return;
                 }
