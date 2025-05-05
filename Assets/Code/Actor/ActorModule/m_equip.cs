@@ -68,7 +68,7 @@ namespace Triheroes.Code
             if ( weaponUser == null && !mss.stateIsOn(1) && weapons [id] )
             {
             cdwa.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
-            mss.SetState (1,cdwa,true);
+            mss.SetState (1,cdwa);
             mss.AquireStatePlayer (1,this);
             ptrWeapon = id;
             }
@@ -79,7 +79,7 @@ namespace Triheroes.Code
             if ( weaponUser != null && !mss.stateIsOn (1) )
             {
                 crwa.Set (weapons [ptrWeapon].DefaultReturnAnimation);
-                mss.SetState (1,crwa,true);
+                mss.SetState (1,crwa);
                 mss.AquireStatePlayer (1,this);
             }
         }

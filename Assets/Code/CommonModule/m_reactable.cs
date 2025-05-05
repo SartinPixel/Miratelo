@@ -8,7 +8,6 @@ namespace Triheroes.Code
     public class m_reaction_receiver : indexedmodule <m_reaction_receiver>
     {
         public reactable reactable;
-        public Action <Force> Clash;
 
         public override void Create1()
         {
@@ -28,6 +27,11 @@ namespace Triheroes.Code
     public abstract class reactable : node
     {
         public abstract void Clash (Force force, reactable from);
+        
+        // generic reaction
+        public Action <Force> Parry;
+        
+        public Action <Force> Hit;
     }
 
     public enum ObjType { skin, metal, wood }

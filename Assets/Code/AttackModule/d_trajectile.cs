@@ -19,7 +19,7 @@ namespace Triheroes.Code
         {
             mrr = new m_reaction_receiver();
             mrr.reactable = new r_metal ();
-            mrr.Clash += Clash;
+            mrr.reactable.Parry += Parry;
         }
 
         public static void Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed, float rawPower )
@@ -36,7 +36,7 @@ namespace Triheroes.Code
             EndFire ();
         }
 
-        void Clash ( Force force )
+        void Parry ( Force force )
         {
             if (on && force.type == ForceType.perce_parry )
             rotation = Vecteur.RotDirectionQuaternion (Vector3.zero,force.Normal);

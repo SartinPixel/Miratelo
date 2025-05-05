@@ -40,7 +40,7 @@ namespace Triheroes.Code
                         ad.dashDirection = direction.back;
                 }
 
-                pmc.OverrideMaster ( this, ad, true );
+                pmc.OverrideMaster ( this, ad );
             }
             return false;
         }

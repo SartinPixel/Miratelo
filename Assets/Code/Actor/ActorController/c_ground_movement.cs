@@ -17,6 +17,11 @@ namespace Triheroes.Code
         public m_skin ms;
         [Depend]
         m_standard_character_controller_host mscch;
+        
+        [Depend]
+        m_reaction_receiver mrr;
+        [Depend]
+        m_hit mh;
 
         public SuperKey state;
         public Vector3 walkDir;
@@ -34,6 +39,8 @@ namespace Triheroes.Code
             rotDir = Vecteur.LDir ( ms.rotY, Vector3.forward ) ;
             ToIdle ();
             mccc.Aquire (this);
+
+            mrr.reactable.Hit = mh.HitSimple;
         }
 
         protected override bool Step()
@@ -58,6 +65,8 @@ namespace Triheroes.Code
         {
             mccc.Free (this);
             ms.SkinMove = false;
+
+            mrr.reactable.Hit = null;
         }
         #endregion
 

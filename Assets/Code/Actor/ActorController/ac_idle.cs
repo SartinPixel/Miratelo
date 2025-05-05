@@ -14,7 +14,7 @@ namespace Triheroes.Code
 
         protected override void BeginStep()
         {
-            mss.SetMainState ( mscch.ss,true );
+            mss.SetMainState ( mscch.ss );
             mss.AquireMainStatePlayer (this);
         }
 

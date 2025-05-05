@@ -15,12 +15,10 @@ namespace Triheroes.Code
     public sealed class m_state_stack : core
     {
         state_player [] StateStack;
-        bool [] CanAbort;
 
         public override void Create()
         {
             StateStack = new state_player [2];
-            CanAbort = new bool [2];
 
             for (int i = 0; i < StateStack.Length; i++)
                 StateStack [i] = character.ConnectNode ( new state_player() );
@@ -56,18 +54,9 @@ namespace Triheroes.Code
 
         public action GetState (int layer) => StateStack [layer].state;
 
-        public void SetMainState ( action state, bool CanAbort = false ) => SetState ( 0, state, CanAbort );
+        public void SetMainState ( action state) => SetState ( 0, state );
 
-        public bool SetState (int layer, action state, bool CanAbort = false)
-        {
-            if ( (this.CanAbort[0] || !StateStack [0].on) &&  ( this.CanAbort [layer] || !StateStack [layer].on ) )
-            {
-                StateStack [layer].SetState ( state );
-                this.CanAbort [layer] = CanAbort;
-                return true;
-            }
-            return false;
-        }
+        public void SetState (int layer, action state) => StateStack [layer].SetState ( state );
 
         private class state_player : core
         {

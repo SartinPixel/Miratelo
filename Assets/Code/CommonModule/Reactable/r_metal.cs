@@ -11,6 +11,7 @@ namespace Triheroes.Code
             if ( force.type == ForceType.perce_parry )
             {
                 Reaction.sp_impact.Emit ( force.impactPoint );
+                Parry?.Invoke ( force );
                 return;
             }
         }

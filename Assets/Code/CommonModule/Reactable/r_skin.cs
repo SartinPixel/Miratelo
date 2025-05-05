@@ -13,8 +13,8 @@ namespace Triheroes.Code
         public override void Clash(Force force, reactable from)
         {
             msh.HP -= force.raw;
+            Hit?.Invoke (force);
             Reaction.sp_blow.Emit ( force.impactPoint );
         }
-
     }
 }

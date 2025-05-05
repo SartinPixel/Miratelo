@@ -19,7 +19,6 @@ namespace Triheroes.Code
 
         public static void Clash (m_reaction_receiver from, m_reaction_receiver to, Force force)
         {
-            to.Clash?.Invoke ( force );
             to.reactable.Clash ( force, from.reactable );
         }
     }
