@@ -10,17 +10,17 @@ namespace Triheroes.Code
         [Depend]
         m_standard_character_controller_host mscch;
         [Depend]
-        m_state_player msp;
+        m_state_stack mss;
 
         protected override void BeginStep()
         {
-            msp.SetState (mscch.ss);
-            msp.Aquire (this);
+            mss.SetMainState ( mscch.ss,true );
+            mss.AquireMainStatePlayer (this);
         }
 
         protected override void Stop()
         {
-            msp.Free (this);
+            mss.FreeMainStatePlayer (this);
         }
     }
 

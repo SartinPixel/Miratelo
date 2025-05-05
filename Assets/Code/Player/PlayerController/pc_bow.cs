@@ -9,7 +9,7 @@ namespace Triheroes.Code
     public class pc_bow : action
     {
         [Depend]
-        m_arm_state mas;
+        m_state_stack mss;
         [Depend]
         m_bow_user mbu;
 
@@ -30,10 +30,10 @@ namespace Triheroes.Code
                 else if (Player.GetButtonDown (BoutonId.Fire1))
                 mbu.ca.StartShoot ();
             }
-            else if ( !mas.on && Player.GetButtonDown (BoutonId.Fire3) )
+            else if ( !mss.stateIsOn(1) && Player.GetButtonDown (BoutonId.Fire3) )
             {
-                mas.SetState ( mbu.ca, true );
-                mas.Aquire (this);
+                mss.SetState ( 1, mbu.ca, true );
+                mss.AquireStatePlayer ( 1, this );
             }
             return false;
         }

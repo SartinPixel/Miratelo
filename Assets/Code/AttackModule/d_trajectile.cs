@@ -84,7 +84,7 @@ namespace Triheroes.Code
         {
             if (Physics.Raycast(position, Vecteur.Forward(rotation), out RaycastHit hit, 2 * speed, Vecteur.SolidCharacterAttack))
             {
-                if (m_trajectile_alert.index.TryGetValue(hit.collider.id() , out m_trajectile_alert A))
+                if (m_trajectile_alert.TryGet (hit.collider.id() , out m_trajectile_alert A))
                     A.AlertIncomingTrajectile ( this , hit.distance / speed );
             }
             return;

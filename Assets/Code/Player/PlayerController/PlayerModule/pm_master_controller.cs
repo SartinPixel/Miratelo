@@ -8,67 +8,67 @@ namespace Triheroes.Code
     public class pm_master_controller : core
     {
         [Depend]
-        m_state_player msp;
-        public action defaultMaster {private set; get;}
-        public action defaultState {private set; get;}
-        public action overrideMaster {private set; get;}
+        m_state_stack mss;
+        public action defaultMaster { private set; get; }
+        public action defaultState { private set; get; }
+        public action overrideMaster { private set; get; }
 
         protected override void OnFree()
         {
             if (defaultMaster != null && overrideMaster == null)
-            msp.Free (defaultMaster);
-            if ( overrideMaster != null )
-            msp.Free (overrideMaster);
+                mss.FreeMainStatePlayer(defaultMaster);
+            if (overrideMaster != null)
+                mss.FreeMainStatePlayer(overrideMaster);
 
             defaultMaster = null;
             defaultState = null;
             overrideMaster = null;
         }
 
-        public void SetDefaultMaster (action newMaster, action state)
+        public void SetDefaultMaster(action newMaster, action state)
         {
             if (on)
             {
-                if ( overrideMaster == null )
+                if (overrideMaster == null)
                 {
                     if (defaultMaster != null)
                     {
-                    if (msp.on)
-                    msp.Free (defaultMaster);
+                        if (mss.stateIsOn(0))
+                            mss.FreeMainStatePlayer(defaultMaster);
                     }
                 }
 
                 defaultMaster = newMaster;
                 defaultState = state;
 
-                if ( overrideMaster == null )
+                if (overrideMaster == null)
                 {
-                msp.SetState ( state );
-                msp.Aquire ( defaultMaster );
+                    mss.SetMainState(state);
+                    mss.AquireMainStatePlayer(defaultMaster);
                 }
             }
         }
 
-        public void Update ()
+        public void Update()
         {
-            if ( overrideMaster != null && !msp.on)
+            if (overrideMaster != null && !mss.stateIsOn(0))
             {
-                msp.SetState ( defaultState );
-                msp.Aquire ( defaultMaster );
+                mss.SetMainState(defaultState);
+                mss.AquireMainStatePlayer(defaultMaster);
                 overrideMaster = null;
             }
         }
 
-        public void OverrideMaster (action newOverrideMaster, action state)
+        public void OverrideMaster(action newOverrideMaster, action state)
         {
-            if (on && overrideMaster == null )
+            if (on && overrideMaster == null)
             {
-            msp.Free (defaultMaster);
+                mss.FreeMainStatePlayer(defaultMaster);
 
-            overrideMaster = newOverrideMaster;
+                overrideMaster = newOverrideMaster;
 
-            msp.SetState (state);
-            msp.Aquire ( newOverrideMaster );
+                mss.SetMainState(state);
+                mss.AquireMainStatePlayer(newOverrideMaster);
             }
         }
     }

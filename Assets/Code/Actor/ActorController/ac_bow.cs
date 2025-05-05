@@ -24,7 +24,7 @@ namespace Triheroes.Code
     public class ac_aim_target : action
     {
         [Depend]
-        m_arm_state mas;
+        m_state_stack mss;
         [Depend]
         m_bow_user mbu;
         [Depend]
@@ -37,8 +37,8 @@ namespace Triheroes.Code
 
         protected override void BeginStep()
         {
-            mas.SetState ( mbu.ca );
-            mas.Aquire (this);
+            mss.SetState ( 1, mbu.ca );
+            mss.AquireStatePlayer (1,this);
 
             rotDir = Quaternion.Euler(ms.rotY);
         }
@@ -48,7 +48,7 @@ namespace Triheroes.Code
             if (ma.target == null)
                 return true;
 
-            if (mas.state != mbu.ca)
+            if (mss.GetState (1) != mbu.ca)
                 return true;
 
             Vector3 TargetPosition = ma.target.md.position + Vector3.up * (ma.target.md.h * 0.5f);
@@ -62,7 +62,7 @@ namespace Triheroes.Code
         protected override void Abort()
         {
             // TODO check if mas will be stopped automatically or need manual stop
-            mas.Free (this);
+            mss.FreeStatePlayer (1,this);
         }
     }
 

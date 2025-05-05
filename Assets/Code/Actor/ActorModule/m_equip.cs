@@ -9,7 +9,7 @@ namespace Triheroes.Code
     public sealed class m_equip : module, ICoreFeedback
     {
         [Depend]
-        m_arm_state mas;
+        m_state_stack mss;
         [Depend]
         m_sword_user msu;
         [Depend]
@@ -65,33 +65,33 @@ namespace Triheroes.Code
         
         public void DrawWeapon ( int id )
         {
-            if ( weaponUser == null && !mas.on && weapons [id] )
+            if ( weaponUser == null && !mss.stateIsOn(1) && weapons [id] )
             {
             cdwa.Set ( weapons [id], weapons [id].DefaultDrawAnimation );
-            mas.SetState (cdwa,true);
-            mas.Aquire (this);
+            mss.SetState (1,cdwa,true);
+            mss.AquireStatePlayer (1,this);
             ptrWeapon = id;
             }
         }
 
         public void ReturnWeapon ()
         {
-            if ( weaponUser != null && !mas.on )
+            if ( weaponUser != null && !mss.stateIsOn (1) )
             {
                 crwa.Set (weapons [ptrWeapon].DefaultReturnAnimation);
-                mas.SetState (crwa,true);
-                mas.Aquire (this);
+                mss.SetState (1,crwa,true);
+                mss.AquireStatePlayer (1,this);
             }
         }
 
         
         public void AquiredNodeStopped(node AquiredNode)
         {
-            if (AquiredNode == mas)
+            if ( AquiredNode == mss.GetStatePlayer(1) )
             {
-            if (mas.state == cdwa)
+            if (mss.GetState (1) == cdwa)
             StartWeaponUser ();
-            else if (mas.state == crwa)
+            else if (mss.GetState (1) == crwa)
             ReturnWeaponDone ();
             }
         }
@@ -99,9 +99,9 @@ namespace Triheroes.Code
         
         public void AquiredNodeAborted(node AquiredNode)
         {
-            if (AquiredNode == mas)
+            if ( AquiredNode == mss.GetStatePlayer(1) )
             {
-            if (mas.state == cdwa)
+            if (mss.GetState (1) == cdwa)
             ptrWeapon = -1;
             }
         }

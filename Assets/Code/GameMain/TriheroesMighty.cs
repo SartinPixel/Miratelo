@@ -29,6 +29,7 @@ namespace Triheroes.Code
             m_reaction_receiver.InitIndex ();
             m_attack_receiver.InitIndex ();
             m_trajectile_alert.InitIndex ();
+            m_slash_alert.InitIndex ();
 
             Systems = new List<CoreSystemBase>()
             {
@@ -40,10 +41,11 @@ namespace Triheroes.Code
 
                 // character controller and AI
                 new s_character_controller (),
-                new s_state_player (),
+                new s_state_stack (),
 
                 // attack predictions
                 new m_trajectile_alert.s_trajectile_alert (),
+                new m_slash_alert.s_slash_alert (),
                 // attacks
                 new d_slash_attack.s_slash_attack (),
                 new d_trajectile.s_trajectile (),

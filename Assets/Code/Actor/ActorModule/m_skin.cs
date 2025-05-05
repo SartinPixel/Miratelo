@@ -7,7 +7,6 @@ namespace Triheroes.Code
 {
     public class m_skin : core
     {
-
         public Transform Coord;
         public Animator Ani;
         AniExt AniExt;
@@ -52,7 +51,7 @@ namespace Triheroes.Code
             Ani = A.Skin.GetComponent<Animator>();
             AniExt = A.Skin.AniExt;
 
-            // disable fucking firing event
+            // disable firing event
             Ani.fireEvents = false;
 
             // create skin additional module on request

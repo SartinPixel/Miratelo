@@ -20,7 +20,7 @@ namespace Pixify
 
         public override void OnInspectorGUI()
         {
-            if (EditorApplication.isPlaying)
+            if (EditorApplication.isPlaying && Target.enabled)
             ModuleUI ();
         }
 

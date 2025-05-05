@@ -12,7 +12,7 @@ namespace Triheroes.Code
         [Depend]
         m_standard_character_controller_host mscch;
         [Depend]
-        m_state_player msp;
+        m_state_stack mss;
 
         public float Speed;
         public bool StopWhenDone;
@@ -33,8 +33,8 @@ namespace Triheroes.Code
 
             target = ma.target;
             distance = ma.md.r + target.md.r + StopDistance;
-            msp.SetState (mscch.ss);
-            msp.Aquire (this);
+            mss.SetMainState (mscch.ss);
+            mss.AquireMainStatePlayer (this);
         }
 
         protected override bool Step()
@@ -55,7 +55,7 @@ namespace Triheroes.Code
 
         protected override void Stop()
         {
-            msp.Free (this);
+            mss.FreeMainStatePlayer (this);
         }
 
     }

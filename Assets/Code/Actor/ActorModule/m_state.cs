@@ -6,76 +6,111 @@ using UnityEngine;
 
 namespace Triheroes.Code
 {
-    public class m_state_player : core
+    /// <summary>
+    /// stack state
+    /// main state have priority, cannot be aborted by substate
+    /// self aquired, no need to aquire, the aquire method is overriden to aquire the state players instead
+    /// aquire the state players instead
+    /// </summary>
+    public sealed class m_state_stack : core
     {
-        public action state { private set; get; }
-        bool CanAbort = true;
+        state_player [] StateStack;
+        bool [] CanAbort;
 
-        /// <summary>
-        /// aquire state player, don't forget to set a state before
-        /// </summary>
-        protected sealed override void OnAquire()
+        public override void Create()
         {
-            if (!state.on)
-                state.iStart();
-            else
+            StateStack = new state_player [2];
+            CanAbort = new bool [2];
+
+            for (int i = 0; i < StateStack.Length; i++)
+                StateStack [i] = character.ConnectNode ( new state_player() );
+
+            // self aquire
+            Aquire ( new Null () );
+        }
+
+        public bool stateIsOn (int layer) => StateStack [layer].on;
+        /// <summary>
+        /// Aquire the first state player
+        /// </summary>
+        /// <param name="host"></param>
+        public void AquireMainStatePlayer ( node host ) => AquireStatePlayer ( 0, host );
+
+        public void AquireStatePlayer ( int layer, node host ) => StateStack [layer].Aquire (host);
+        /// <summary>
+        /// free the first state player
+        /// </summary>
+        /// <param name="host"></param>
+        public void FreeMainStatePlayer (node host) => FreeStatePlayer ( 0, host );
+        public void FreeStatePlayer ( int layer, node host ) => StateStack [layer].Free (host);
+        public core GetStatePlayer ( int layer ) => StateStack [layer];
+
+        public void Main ()
+        {
+            for (int i = 0; i < StateStack.Length; i++)
             {
-                SelfFree();
-                throw new InvalidOperationException("stateplayer cannot start a live node");
+                if (StateStack [i].on)
+                StateStack[i].Update ();
             }
         }
 
-        protected sealed override void OnFree()
-        {
-            if (state.on)
-                state.iAbort();
-            CanAbort = false;
-        }
+        public action GetState (int layer) => StateStack [layer].state;
 
-        public void Main()
-        {
-            if (state.on)
-                state.iExecute();
-            else
-                SelfFree();
-        }
+        public void SetMainState ( action state, bool CanAbort = false ) => SetState ( 0, state, CanAbort );
 
-        /// <summary>
-        /// set a state before aquiring
-        /// </summary>
-        /// <param name="state"></param>
-        public bool SetState(action state, bool canAbort = false)
+        public bool SetState (int layer, action state, bool CanAbort = false)
         {
-            if (on)
+            if ( this.CanAbort [layer] || !StateStack [layer].on )
             {
-                if (CanAbort)
-                {
-                    SelfAbort();
-                    this.state = state;
-                    CanAbort = canAbort;
-                    return true;
-                }
-                return false;
-            }
-            else
-            {
-                this.state = state;
-                CanAbort = canAbort;
+                StateStack [layer].SetState ( state );
+                this.CanAbort [layer] = CanAbort;
                 return true;
+            }
+            return false;
+        }
+
+        private class state_player : core
+        {
+            public action state;
+            protected sealed override void OnAquire()
+            {
+                if (!state.on)
+                    state.iStart();
+                else
+                {
+                    SelfFree();
+                    throw new InvalidOperationException("FATAL ERROR: stateplayer cannot start a live node");
+                }
+            }
+
+            protected sealed override void OnFree()
+            {
+                if (state.on)
+                state.iAbort();
+            }
+
+            public void Update()
+            {
+                if (state.on)
+                    state.iExecute();
+                else
+                    SelfFree();
+            }
+
+            public void SetState ( action state )
+            {
+                if (on)
+                SelfAbort ();
+                this.state = state;
             }
         }
     }
 
-    // TODO about normal state, need to find way to not allow arm state to be aquired with some specific normal state
-    [RegisterAsBase]
-    public class m_arm_state : m_state_player
-    { }
-
-    public class s_state_player : CoreSystem<m_state_player>
+    public class s_state_stack : CoreSystem<m_state_stack>
     {
-        protected override void Main(m_state_player o)
+        protected override void Main(m_state_stack o)
         {
-            o.Main();
+            o.Main ();
         }
     }
 

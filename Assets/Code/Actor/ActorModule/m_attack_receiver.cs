@@ -15,7 +15,7 @@ namespace Triheroes.Code
         [Depend]
         public m_character_controller mcc;
         [Depend]
-        public m_arm_state mas;
+        public m_state_stack mss;
         
         public ac_hit ah;
 
@@ -27,8 +27,8 @@ namespace Triheroes.Code
 
         public void Clash ( Force force )
         {
-            if ( mas.SetState ( ah ) )
-            mas.Aquire (this);
+            if ( mss.SetState ( 1, ah ) )
+            mss.AquireStatePlayer ( 1, this );
             //mcc.OverrideFocus ( ControllerKey.hit_normal );
         }
     }

@@ -10,7 +10,7 @@ namespace Triheroes.Code
         [Depend]
         m_equip me;
         [Depend]
-        m_arm_state mas;
+        m_state_stack mss;
 
         int ptrWeapon;
         bool pendingSwap;
@@ -32,7 +32,7 @@ namespace Triheroes.Code
             {
                 pendingSwap = false;
 
-                if ( mas.on )
+                if ( mss.stateIsOn (1) )
                 return false;
 
                 ptrWeapon ++;
