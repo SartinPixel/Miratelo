@@ -65,7 +65,7 @@ namespace Triheroes.Code
 
         void Shoot ()
         {
-            d_trajectile.Fire ( mbu.Weapon.ArrowPaper, mbu.Weapon.BowString.position,Quaternion.Euler (mbu.rotY), mbu.Weapon.Speed );
+            d_trajectile.Fire ( mbu.Weapon.ArrowPaper, mbu.Weapon.BowString.position,Quaternion.Euler (mbu.rotY), mbu.Weapon.Speed, mbu.Weapon.XPower );
             mspb.isRotatingWithBow = m_skin_produceral_bow.isRotatingWithBowState.hold;
             isShooting = false;
         }

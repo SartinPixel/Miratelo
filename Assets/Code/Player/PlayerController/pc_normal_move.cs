@@ -15,6 +15,8 @@ namespace Triheroes.Code
         m_ground_data mgd;
         [Depend]
         m_state_energy_auto msea;
+        [Depend]
+        m_stat_health msh;
 
         protected override void BeginStep()
         {
@@ -29,7 +31,7 @@ namespace Triheroes.Code
             mscch.cgm.tired = (msea.energy == 0);
             InputAxis = Vecteur.LDir(new Vector3(0, m_camera.o.mcts.rotY.y, 0), InputAxis) * 6f;
 
-            UIDebug.PushText ( msea.energy.ToString () );
+            UIDebug.PushText ( msh.HP.ToString () );
 
             if (mgd.onGround)
             {

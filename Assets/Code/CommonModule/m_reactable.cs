@@ -13,16 +13,19 @@ namespace Triheroes.Code
         public override void Create1()
         {
             var type = character.GetComponent <ABase>().CharacterObjType;
+
             switch (type)
             {
                 case ObjType.skin:
                 reactable = new r_skin ();
                 break;
             }
+
+            character.ConnectNode ( reactable );
         }
     }
 
-    public abstract class reactable
+    public abstract class reactable : node
     {
         public abstract void Clash (Force force, reactable from);
     }

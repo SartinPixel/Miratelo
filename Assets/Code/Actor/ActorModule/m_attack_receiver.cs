@@ -27,7 +27,7 @@ namespace Triheroes.Code
 
         public void Clash ( Force force )
         {
-            if ( mss.SetState ( 1, ah ) )
+            if ( mss.SetState ( 1, ah, false ) )
             mss.AquireStatePlayer ( 1, this );
             //mcc.OverrideFocus ( ControllerKey.hit_normal );
         }

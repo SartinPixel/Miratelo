@@ -13,6 +13,7 @@ namespace Triheroes.Code
         public Vector3 position;
         public Quaternion rotation;
         public DotSkin dotSkin;
+        float rawPower;
 
         public override void Create()
         {
@@ -21,7 +22,7 @@ namespace Triheroes.Code
             mrr.Clash += Clash;
         }
 
-        public static void Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed )
+        public static void Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed, float rawPower )
         {
             var a = BeginFire ();
 
@@ -29,6 +30,7 @@ namespace Triheroes.Code
             a.position = pos;
             a.rotation = rot;
             a.speed = speed;
+            a.rawPower = rawPower;
             a.timeLeft = 15;
 
             EndFire ();
@@ -56,7 +58,7 @@ namespace Triheroes.Code
                 position += Vecteur.Forward (rotation) * Hit.distance;
                 if ( m_attack_receiver.index.TryGetValue ( Hit.collider.id(), out m_attack_receiver A ) )
                 {
-                    Reaction.Clash ( mrr, A.mrr, new Force ( ForceType.perce, 0, position ) );
+                    Reaction.Clash ( mrr, A.mrr, new Force ( ForceType.perce, rawPower, position) );
                     DeFire (this);
                     return;
                 }

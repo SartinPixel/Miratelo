@@ -24,7 +24,7 @@ public class UIDebug : MonoBehaviour
 
     public static void PushText(String Log)
     {
-        o.TextPush.text = String.Concat(o.TextPush.text, Log);
+        o.TextPush.text = String.Concat(o.TextPush.text, Log, "\n");
     }
 
     public static void SetMarker(Vector3 Position)

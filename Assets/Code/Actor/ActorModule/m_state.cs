@@ -60,7 +60,7 @@ namespace Triheroes.Code
 
         public bool SetState (int layer, action state, bool CanAbort = false)
         {
-            if ( this.CanAbort [layer] || !StateStack [layer].on )
+            if ( (this.CanAbort[0] || !StateStack [0].on) &&  ( this.CanAbort [layer] || !StateStack [layer].on ) )
             {
                 StateStack [layer].SetState ( state );
                 this.CanAbort [layer] = CanAbort;
@@ -86,7 +86,10 @@ namespace Triheroes.Code
             protected sealed override void OnFree()
             {
                 if (state.on)
+                {
                 state.iAbort();
+                state = null;
+                }
             }
 
             public void Update()

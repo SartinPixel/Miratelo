@@ -10,16 +10,18 @@ namespace Triheroes.Code
         SlashAttackCollider Col;
         SlashAttackSize targSize;
 
+        float rawPower;
         float time;
         m_sword_user origin;
 
-        public static void Fire ( m_sword_user sender, Vector3 pos, Quaternion rot, SlashAttackSize Size )
+        public static void Fire ( m_sword_user sender, Vector3 pos, Quaternion rot, SlashAttackSize Size, float rawPower )
         {
             var a = BeginFire ();
 
             a.origin = sender;
             a.Col.transform.position = pos; a.Col.transform.rotation = rot;
             a.targSize = Size;
+            a.rawPower = rawPower;
 
             a.Col.Collider.size = new Vector3 ( 0, a.targSize.Size.y, a.targSize.Size.z );
             a.Col.Collider.center = Vector3.left * a.targSize.Size.x * 0.5f;
@@ -55,7 +57,7 @@ namespace Triheroes.Code
         {
             if ( m_attack_receiver.index.TryGetValue (col.id(), out m_attack_receiver A) && !HittedCharacter.Contains (A) && A.ma.Role.Side != origin.ma.Role.Side )
             { 
-                Reaction.Clash ( origin.Weapon.mrr, A.mrr, new Force( ForceType.slash, 0, col.contacts[0].point ) );
+                Reaction.Clash ( origin.Weapon.mrr, A.mrr, new Force( ForceType.slash, rawPower , col.contacts[0].point ) );
                 HittedCharacter.Add (A);
             }
         }

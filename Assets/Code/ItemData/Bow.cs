@@ -14,5 +14,6 @@ namespace Triheroes.Code
         public Transform BowString;
         public DotSkin ArrowPaper;
         public float Speed = 30;
+        public float XPower;
     }
 }

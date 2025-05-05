@@ -43,7 +43,7 @@ namespace Triheroes.Code
 
                 if (overrideMaster == null)
                 {
-                    mss.SetMainState(state);
+                    mss.SetMainState(state, true);
                     mss.AquireMainStatePlayer(defaultMaster);
                 }
             }
@@ -53,13 +53,13 @@ namespace Triheroes.Code
         {
             if (overrideMaster != null && !mss.stateIsOn(0))
             {
-                mss.SetMainState(defaultState);
+                mss.SetMainState(defaultState,true);
                 mss.AquireMainStatePlayer(defaultMaster);
                 overrideMaster = null;
             }
         }
 
-        public void OverrideMaster(action newOverrideMaster, action state)
+        public void OverrideMaster(action newOverrideMaster, action state, bool CanAbort = false)
         {
             if (on && overrideMaster == null)
             {
@@ -67,7 +67,7 @@ namespace Triheroes.Code
 
                 overrideMaster = newOverrideMaster;
 
-                mss.SetMainState(state);
+                mss.SetMainState(state, CanAbort);
                 mss.AquireMainStatePlayer(newOverrideMaster);
             }
         }

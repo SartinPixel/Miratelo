@@ -69,7 +69,7 @@ namespace Triheroes.Code
 
         void Slash ()
         {
-            d_slash_attack.Fire ( msu, ms.Coord.position + Vecteur.LDir ( ms.rotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.rotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize );
+            d_slash_attack.Fire ( msu, ms.Coord.position + Vecteur.LDir ( ms.rotY, msu.SlashPos [currentSlashId] ), Quaternion.Euler (ms.rotY) * msu.SlashRot [currentSlashId], msu.Weapon.slashSize, msu.Weapon.XPower );
         }
 
         void ComboEnd ()

@@ -8,6 +8,7 @@ namespace Triheroes.Code
     public class Sword : Weapon
     {
         public float Lenght = 10;
+        public float XPower;
 
         public m_reaction_receiver mrr;
 

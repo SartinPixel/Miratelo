@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lenght: 1.5
+  XPower: 1
   slashSize:
     zOffset: 0.96
     Size: {x: 1, y: 0.1, z: 1.5}
@@ -949,6 +950,7 @@ MonoBehaviour:
   MaxEnergy: 7
   DelayTime: 2
   RestorationPerSecond: 1
+  MaxHP: 4
 --- !u!114 &553894028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,6 +1436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lenght: 1.5
+  XPower: 1
   slashSize:
     zOffset: 1.43
     Size: {x: 1.35, y: 0.09, z: 2.62}
