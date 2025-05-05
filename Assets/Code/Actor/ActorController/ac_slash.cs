@@ -14,7 +14,14 @@ namespace Triheroes.Code
         [Depend]
         m_actor ma;
 
+        int ComboId = 0;
         bool nextComboReady;
+
+        public ac_slash () {}
+        public ac_slash ( int ComboId )
+        {
+            this.ComboId = ComboId;
+        }
 
         protected override void BeginStep()
         {
@@ -22,7 +29,7 @@ namespace Triheroes.Code
             EndSlash ();
 
             if (msu.state == StateKey.zero)
-            BeginSlash (0);
+            BeginSlash (ComboId);
             else
             EndSlash ();
 
@@ -41,9 +48,18 @@ namespace Triheroes.Code
             if (!msu.on)
             Debug.LogError ("this character is trying to play slash animation on a character that is not using sword");
 
+            // slash attack
             ms.PlayState ( 0, m_sword_user.SlashKeys [id] , 0.1f, ComboEnd, null, Slash );
             msu.state = StateKey.slash;
             currentSlashId = id;
+
+            // send alert
+            Collider[] NearbyChar = Physics.OverlapSphere ( msu.Weapon.transform.position, msu.Weapon.Lenght * 1.5f, Vecteur.Character );
+            for (int i = 0; i < NearbyChar.Length; i++)
+            {
+                if ( m_slash_alert.TryGet ( NearbyChar[i].id(), out m_slash_alert A ) )
+                A.AlertSlash ( ms.EventPointsOfState ( m_sword_user.SlashKeys [id] ) [0], m_sword_user.ParryKeys [id] );
+            }
         }
 
         public void ComboAppend ()
@@ -86,7 +102,7 @@ namespace Triheroes.Code
         m_skin ms;
 
         d_trajectile trajectile;
-        public void SetTrajectile ( d_trajectile trajectileToParry )
+        public void Set ( d_trajectile trajectileToParry )
         {
             trajectile = trajectileToParry;
         }
@@ -127,6 +143,47 @@ namespace Triheroes.Code
         protected override void Stop()
         {
             if ( msu.state == StateKey.parry_trajectile )
+            msu.state = StateKey.zero;
+        }
+    }
+
+    public sealed class ac_slash_parry : action
+    {
+        [Depend]
+        m_sword_user msu;
+        [Depend]
+        m_skin ms;
+
+        SuperKey parryKey;
+
+        public void Set ( SuperKey parryKey )
+        {
+            this.parryKey = parryKey;
+        }
+
+        protected override void BeginStep()
+        {
+            if ( !msu.on )
+            {
+            AppendStop();
+            return;
+            }
+
+            if ( msu.state == StateKey.zero )
+            Begin ();
+            else
+            Debug.LogError ("this character is trying to parry but the sword_user is not ready");
+        }
+
+        void Begin ()
+        {
+            ms.PlayState ( 0, parryKey, 0.1f, AppendStop );
+            msu.state = StateKey.parry;
+        }
+
+        protected override void Stop()
+        {
+            if ( msu.state == StateKey.parry )
             msu.state = StateKey.zero;
         }
     }

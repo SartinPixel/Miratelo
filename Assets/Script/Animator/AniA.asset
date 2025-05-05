@@ -118,6 +118,18 @@ MonoBehaviour:
     Duration: 0.8000001
     EvPoint: []
   - Key:
+      value: -950723988
+      keyName: parry_1
+    Duration: 1
+    EvPoint:
+    - 0.7410821
+  - Key:
+      value: 1583107030
+      keyName: parry_2
+    Duration: 1
+    EvPoint:
+    - 0.7474476
+  - Key:
       value: 289444158
       keyName: fall_end
     Duration: 0.3

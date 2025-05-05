@@ -17,8 +17,9 @@ namespace Triheroes.Code
         public Quaternion[] SlashRot;
         public Vector3[] SlashPos;
 
-        
+        // hardcoded slash params
         public static readonly SuperKey[] SlashKeys = { AnimationKey.slash_0, AnimationKey.slash_1, AnimationKey.slash_2 };
+        public static readonly SuperKey[] ParryKeys = { AnimationKey.parry_1 , AnimationKey.parry_2, AnimationKey.parry_1};
 
         protected override void Create1()
         {   
