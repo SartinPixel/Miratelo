@@ -10,15 +10,11 @@ public class scr_enemy_test : ScriptInit
     public override void OnAddScript(Dictionary<SuperKey, script> scriptHolder)
     {
         var r1 = new sequence (
-            new ac_goto_target_agm ( 10, 4, true ),
-            new ac_equip_weapon ( 1 ),
-            new parallel (
-                new ac_idle (),
-                new ac_aim_target (),
-                new spawner (
-                    new ac_bow_shoot ()
-                ).Set ( true, 30, 1 )
-                )
+            new ac_equip_weapon ( 0 ),
+            new ac_goto_target_agm ( 10, 0.23f, true ),
+            new ac_slash (0),
+            new ac_slash (1),
+            new ac_slash (2)
         );
 
         var r = new sequence (
