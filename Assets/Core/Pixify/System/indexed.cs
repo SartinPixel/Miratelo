@@ -27,7 +27,7 @@ namespace Pixify
 
     public abstract class indexedcore<T> : core where T : indexedcore<T>, new()
     {
-        public static Dictionary<int, T> index;
+        static Dictionary<int, T> index;
 
         /// <summary>
         /// to be initialized by sceneMaster
@@ -36,6 +36,8 @@ namespace Pixify
         {
             index = new Dictionary<int, T>();
         }
+
+        public static bool TryGet ( int id, out T value ) => index.TryGetValue ( id, out value );
 
         protected sealed override void OnAquire()
         {
