@@ -30,5 +30,6 @@ namespace Triheroes.Code
     public static class ControllerKey
     {
         public static readonly SuperKey hit_normal = new SuperKey("hit_normal");
+        public static readonly SuperKey hit_knocked_out = new SuperKey("hit_knocked_out");
     }
 }

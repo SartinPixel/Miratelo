@@ -16,7 +16,7 @@ namespace Triheroes.Code
                 o.velocityDir = Vector3.MoveTowards(o.velocityDir, Vector3.zero, Vecteur.Drag * Time.deltaTime/*a*/);
 
             Physics.IgnoreLayerCollision(o.Coord.gameObject.layer, Vecteur.ATTACK, true);
-            o.CCA.Move(o.dir + o.dir);
+            o.CCA.Move(o.dir + o.velocityDir);
             Physics.IgnoreLayerCollision(o.Coord.gameObject.layer, Vecteur.ATTACK, false);
 
             o.dir = Vector3.zero;

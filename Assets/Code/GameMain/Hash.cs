@@ -44,6 +44,8 @@ namespace Triheroes.Code
 
         public static readonly SuperKey hit = new SuperKey("hit");
         public static readonly SuperKey hitu = new SuperKey ("hitu");
+        public static readonly SuperKey hit_knocked_a = new SuperKey ("hit_knocked_a");
+        public static readonly SuperKey hit_knocked_b = new SuperKey ("hit_knocked_b");
 
         public static readonly SuperKey take_sword = new SuperKey("take_sword");
         public static readonly SuperKey take_bow = new SuperKey("take_bow");

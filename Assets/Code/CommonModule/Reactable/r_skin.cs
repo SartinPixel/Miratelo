@@ -13,6 +13,9 @@ namespace Triheroes.Code
         public override void Clash(Force force, reactable from)
         {
             msh.HP -= force.raw;
+            if (force.type == ForceType.explosion)
+            Knocked?.Invoke (force);
+            else
             Hit?.Invoke (force);
             Reaction.sp_blow.Emit ( force.impactPoint );
         }

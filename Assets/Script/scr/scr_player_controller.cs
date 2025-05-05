@@ -15,6 +15,7 @@ public class scr_player_controller : ScriptInit
         var pc_target = new pc_target ( 10 );
         var pc_normal_move = new pc_normal_move ();
         var pc_lateral_move = new pc_lateral_move ();
+        var ac_ready_hit_standard = new ac_ready_hit_standard ();
 
 
         var r = new parallel(
@@ -24,6 +25,7 @@ public class scr_player_controller : ScriptInit
                     pc_draw,
                     pc_dash,
                     pc_target,
+                    ac_ready_hit_standard,
                     new guard(  IF (new ac_has_active_weapon()),
                                 DO (new change_focus(new SuperKey("equip_selector"))) )
         );
@@ -52,6 +54,7 @@ public class scr_player_controller : ScriptInit
                 pc_dash,
                 pc_draw,
                 pc_target,
+                ac_ready_hit_standard,
                 new pc_sword(),
                 new guard ( IF (NOT(new ac_check_active_weapon_type (WeaponType.Sword))),
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
@@ -69,12 +72,14 @@ public class scr_player_controller : ScriptInit
                 pc_jump,
                 pc_draw,
                 pc_target,
+                ac_ready_hit_standard,
                 new pc_bow(),
                 new guard ( IF (NOT(new ac_check_active_weapon_type (WeaponType.Bow))),
                             DO (new change_focus ( new SuperKey ( "equip_selector"))) )
         );
         scriptHolder.Add(new SuperKey("bow"), NewScriptFromRoot(r));
         
-        scriptHolder.Add(ControllerKey.hit_normal,HitLibrary.hit_normal ());
+        scriptHolder.Add( ControllerKey.hit_normal,HitLibrary.hit_normal () );
+        scriptHolder.Add( ControllerKey.hit_knocked_out,HitLibrary.hit_knocked_out ());
     }
 }

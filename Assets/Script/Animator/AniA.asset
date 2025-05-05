@@ -140,6 +140,16 @@ MonoBehaviour:
     Duration: Infinity
     EvPoint: []
   - Key:
+      value: -1442825392
+      keyName: hit_knocked_a
+    Duration: 0.33333334
+    EvPoint: []
+  - Key:
+      value: 856255210
+      keyName: hit_knocked_b
+    Duration: 0.5
+    EvPoint: []
+  - Key:
       value: 289444158
       keyName: fall_end
     Duration: 0.3

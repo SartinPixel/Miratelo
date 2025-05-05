@@ -31,6 +31,8 @@ namespace Triheroes.Code
         
         // generic reaction
         public Action <Force> Parry;
+        
+        public Action <Force> Knocked;
         public Action <Force> Blocked;
         
         public Action <Force> Hit;

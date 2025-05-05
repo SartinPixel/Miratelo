@@ -10,6 +10,5 @@ namespace Triheroes.Code
         public bool onGroundAbs;
         public bool onGround;
         public Vector3 groundNormal = Vector3.up;  
-
     }
 }

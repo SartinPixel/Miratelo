@@ -12,4 +12,10 @@ public static partial class HitLibrary
         var r = new sequence ( new ac_hit_cgm () ).set ( false );
         return NewScriptFromRoot(r);
     }
+
+    public static script hit_knocked_out ()
+    {
+        var r = new sequence ( new ac_hit_knocked_out_cgm () ).set ( false );
+        return NewScriptFromRoot(r);
+    }
 }
