@@ -14,6 +14,13 @@ namespace Triheroes.Code
                 Parry?.Invoke ( force );
                 return;
             }
+
+            if ( force.type == ForceType.hard_surface )
+            {
+                Reaction.sp_impact.Emit ( force.impactPoint );
+                Blocked?.Invoke (force);
+                return;
+            }
         }
     }
 }

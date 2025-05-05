@@ -27,9 +27,11 @@ namespace Triheroes.Code
     public abstract class reactable : node
     {
         public abstract void Clash (Force force, reactable from);
+        public void Clash ( Force force ) => Clash ( force, null );
         
         // generic reaction
         public Action <Force> Parry;
+        public Action <Force> Blocked;
         
         public Action <Force> Hit;
     }

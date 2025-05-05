@@ -10,16 +10,23 @@ namespace Triheroes.Code
 
         public static Spectre sp_blow;
         public static Spectre sp_impact;
+        public static Spectre sp_explosion;
 
         public static void LoadSpectres ()
         {
             sp_blow = Loader.LoadIntoScene <Spectre> ("sp/sp_blow");
             sp_impact = Loader.LoadIntoScene <Spectre> ("sp/sp_impact");
+            sp_explosion = Loader.LoadIntoScene <Spectre> ("sp/sp_explosion");
         }
 
         public static void Clash (m_reaction_receiver from, m_reaction_receiver to, Force force)
         {
             to.reactable.Clash ( force, from.reactable );
+        }
+
+        public static void Clash (m_reaction_receiver to, Force force)
+        {
+            to.reactable.Clash ( force );
         }
     }
 
@@ -47,5 +54,5 @@ namespace Triheroes.Code
         }
     }
 
-    public enum ForceType { diffuse, perce, slash, perce_parry, hard }
+    public enum ForceType { diffuse, perce, slash, perce_parry, explosion, hard_surface }
 }

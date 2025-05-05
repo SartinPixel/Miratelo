@@ -55,7 +55,7 @@ namespace Triheroes.Code
         List<m_attack_receiver> HittedCharacter = new List<m_attack_receiver>();
         void OnCollisionDetected (Collision col)
         {
-            if ( m_attack_receiver.index.TryGetValue (col.id(), out m_attack_receiver A) && !HittedCharacter.Contains (A) && A.ma.Role.Side != origin.ma.Role.Side )
+            if ( m_attack_receiver.TryGet (col.id(), out m_attack_receiver A) && !HittedCharacter.Contains (A) && A.ma.Role.Side != origin.ma.Role.Side )
             { 
                 Reaction.Clash ( origin.Weapon.mrr, A.mrr, new Force( ForceType.slash, rawPower , col.contacts[0].point ) );
                 HittedCharacter.Add (A);

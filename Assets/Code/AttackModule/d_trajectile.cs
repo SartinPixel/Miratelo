@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pixify;
+using System;
 
 namespace Triheroes.Code
 {
@@ -14,6 +15,7 @@ namespace Triheroes.Code
         public Quaternion rotation;
         public DotSkin dotSkin;
         float rawPower;
+        public Action Defired;
 
         public override void Create()
         {
@@ -22,7 +24,12 @@ namespace Triheroes.Code
             mrr.reactable.Parry += Parry;
         }
 
-        public static void Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed, float rawPower )
+        protected override void OnFree()
+        {
+            Defired?.Invoke ();
+        }
+
+        public static d_trajectile Fire ( DotSkin dotSkin, Vector3 pos, Quaternion rot, float speed, float rawPower )
         {
             var a = BeginFire ();
 
@@ -34,6 +41,7 @@ namespace Triheroes.Code
             a.timeLeft = 15;
 
             EndFire ();
+            return a;
         }
 
         void Parry ( Force force )
@@ -56,7 +64,14 @@ namespace Triheroes.Code
             if (Physics.Raycast (position, Vecteur.Forward (rotation), out RaycastHit Hit, spd, Vecteur.SolidCharacterAttack ))
             {
                 position += Vecteur.Forward (rotation) * Hit.distance;
-                if ( m_attack_receiver.index.TryGetValue ( Hit.collider.id(), out m_attack_receiver A ) )
+                
+                if ( Hit.collider.gameObject.layer == Vecteur.SOLID )
+                {
+                    Reaction.Clash ( mrr, new Force (ForceType.hard_surface,0,position) );
+                    DeFire (this);
+                }
+                else
+                if ( m_attack_receiver.TryGet ( Hit.collider.id(), out m_attack_receiver A ) )
                 {
                     Reaction.Clash ( mrr, A.mrr, new Force ( ForceType.perce, rawPower, position) );
                     DeFire (this);

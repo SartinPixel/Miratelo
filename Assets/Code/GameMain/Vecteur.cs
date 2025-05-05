@@ -20,6 +20,7 @@ namespace Triheroes.Code
 
 		// layer hardcoded constant
 		public static readonly int ATTACK = 11;
+		public static readonly int SOLID = 9;
 		public static readonly float Drag = 1;
 
 		// initialisation

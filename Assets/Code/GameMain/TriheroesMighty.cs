@@ -18,8 +18,12 @@ namespace Triheroes.Code
             Reaction.LoadSpectres ();
 
             // scene hardcoded pool
+            d_explosion.InitPool (32);
             d_trajectile.InitPool (32);
             d_slash_attack.InitPool (32);
+
+            TrajectileAddon.InitPools ();
+
             d_sfx.InitPool (16);
 
             // scene hardcoded object

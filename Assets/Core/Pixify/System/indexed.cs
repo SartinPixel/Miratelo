@@ -6,7 +6,7 @@ namespace Pixify
 {
     public abstract class indexedmodule<T> : module where T : indexedmodule<T>, new()
     {
-        public static Dictionary<int, T> index;
+        static Dictionary<int, T> index;
 
         /// <summary>
         /// to be initialized by sceneMaster
@@ -23,6 +23,8 @@ namespace Pixify
         }
 
         public virtual void Create1 () {}
+
+        public static bool TryGet ( int id, out T value ) => index.TryGetValue ( id, out value );
     }
 
     public abstract class indexedcore<T> : core where T : indexedcore<T>, new()
