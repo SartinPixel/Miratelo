@@ -130,6 +130,16 @@ MonoBehaviour:
     EvPoint:
     - 0.7474476
   - Key:
+      value: 599360491
+      keyName: idle_tired
+    Duration: Infinity
+    EvPoint: []
+  - Key:
+      value: 7736482
+      keyName: walk_tired
+    Duration: Infinity
+    EvPoint: []
+  - Key:
       value: 289444158
       keyName: fall_end
     Duration: 0.3

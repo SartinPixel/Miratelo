@@ -49,6 +49,9 @@ namespace Triheroes.Code
                 // attacks
                 new d_slash_attack.s_slash_attack (),
                 new d_trajectile.s_trajectile (),
+                
+                // actor stat
+                new s_state_auto (),
 
                 // character physic
                 new s_ccc_gravity (),

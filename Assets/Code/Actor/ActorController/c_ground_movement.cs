@@ -21,8 +21,10 @@ namespace Triheroes.Code
         public SuperKey state;
         public Vector3 walkDir;
         public Vector3 rotDir;
-        public Vector3 walkLatDir;
+        Vector3 walkLatDir;
         public float walkFactor;
+        // TODO separate tired from groundmovement
+        public bool tired;
 
         #region action
         protected override void BeginStep()
@@ -95,7 +97,7 @@ namespace Triheroes.Code
                 }
             }
             // march modulation => idle
-            else if (state == StateKey.run || state == StateKey.walk || state == StateKey.sprint)
+            else if (state == StateKey.run || state == StateKey.walk || state == StateKey.sprint || state == StateKey.walk_tired )
             {
                 if ( !WalkFactorCorrespondsToState(walkFactor, state) )
                     ToRun();
@@ -121,7 +123,7 @@ namespace Triheroes.Code
 
         static bool WalkFactorCorrespondsToState(float factor, SuperKey state)
         {
-            return (factor == WalkFactor.run && state == StateKey.run) || (factor == WalkFactor.walk && state == StateKey.walk) || (factor == WalkFactor.sprint && state == StateKey.sprint);
+            return ( factor == WalkFactor.run && state == StateKey.run) || (factor == WalkFactor.walk && state == StateKey.walk) || (factor == WalkFactor.sprint && state == StateKey.sprint) || (factor == WalkFactor.tired && state == StateKey.walk_tired );
         }
 
         #endregion
@@ -159,27 +161,27 @@ namespace Triheroes.Code
         #endregion
 
         #region state transition
-        public void ToLateral ()
+        void ToLateral ()
         {
             ms.PlayState ( 0, AnimationKey.run_lateral );
             state = StateKey.walk_lateral;
         }
 
-        public void ToIdle ()
+        void ToIdle ()
         {
-            ms.PlayState ( 0, AnimationKey.idle, 0.1f );
+            ms.PlayState ( 0, tired? AnimationKey.idle_tired: AnimationKey.idle, 0.1f );
             state = StateKey.idle;
         }
 
-        public void ToRun ()
+        void ToRun ()
         {
-            ms.PlayState(0, (walkFactor == WalkFactor.walk) ? AnimationKey.walk : (walkFactor == WalkFactor.run) ? AnimationKey.run : AnimationKey.sprint,0.2f);
-            state = (walkFactor == WalkFactor.walk) ? StateKey.walk : (walkFactor == WalkFactor.run) ? StateKey.run : StateKey.sprint;
+            ms.PlayState( 0, (walkFactor == WalkFactor.tired) ? AnimationKey.walk_tired : (walkFactor == WalkFactor.walk) ? AnimationKey.walk : (walkFactor == WalkFactor.run) ? AnimationKey.run : AnimationKey.sprint,0.2f);
+            state = (walkFactor == WalkFactor.tired)? StateKey.walk_tired : (walkFactor == WalkFactor.walk) ? StateKey.walk : (walkFactor == WalkFactor.run) ? StateKey.run : StateKey.sprint;
         }
         #endregion
 
         #region brake move
-        public void Brake ()
+        void Brake ()
         {
             state = StateKey.brake;
             ms.SkinMove = true;
@@ -193,7 +195,7 @@ namespace Triheroes.Code
             ToIdle ();
         }
 
-        public void RotationBrake ()
+        void RotationBrake ()
         {
             state = StateKey.brake_rotation;
             ms.SkinMove = false;
@@ -252,6 +254,7 @@ namespace Triheroes.Code
     {
         public const float idle = 0;
         public const float walk = 0.15f;
+        public const float tired = 0.14f;
         public const float run = 1;
         public const float sprint = 2;
     }

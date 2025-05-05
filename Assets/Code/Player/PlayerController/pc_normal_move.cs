@@ -13,21 +13,36 @@ namespace Triheroes.Code
         m_standard_character_controller_host mscch;
         [Depend]
         m_ground_data mgd;
+        [Depend]
+        m_state_energy_auto msea;
 
-        protected override void BeginStep ()
+        protected override void BeginStep()
         {
-            pmc.SetDefaultMaster (this, mscch.ss);
+            pmc.SetDefaultMaster(this, mscch.ss);
         }
 
         protected override bool Step()
         {
             Vector3 InputAxis;
             InputAxis = Player.GetAxis3();
-            InputAxis = Vecteur.LDir (new Vector3(0, m_camera.o.mcts.rotY.y, 0),InputAxis) * 6f;
+
+            mscch.cgm.tired = (msea.energy == 0);
+            InputAxis = Vecteur.LDir(new Vector3(0, m_camera.o.mcts.rotY.y, 0), InputAxis) * 6f;
+
+            UIDebug.PushText ( msea.energy.ToString () );
+
             if (mgd.onGround)
-            mscch.cgm.Walk ( InputAxis, Player.GetButton (BoutonId.Fire2) ? WalkFactor.sprint : Input.GetKey (KeyCode.X) ? WalkFactor.walk : WalkFactor.run );
-            else
-            mscch.cf.MoveAir ( InputAxis );
+            {
+                if (!mscch.cgm.tired)
+                {
+                    if (Player.GetButton(BoutonId.Fire2))
+                        msea.energy -= Time.deltaTime;
+
+                    mscch.cgm.Walk(InputAxis, Player.GetButton(BoutonId.Fire2) ? WalkFactor.sprint : Input.GetKey(KeyCode.X) ? WalkFactor.walk : WalkFactor.run);
+                }
+                else mscch.cgm.Walk(InputAxis, WalkFactor.tired);
+            }
+            else mscch.cf.MoveAir(InputAxis);
 
             return false;
         }
