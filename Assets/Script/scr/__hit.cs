@@ -15,7 +15,7 @@ public static partial class HitLibrary
 
     public static script hit_knocked_out ()
     {
-        var r = new sequence ( new ac_hit_knocked_out_cgm () ).set ( false );
+        var r = new sequence ( new ac_hit_knocked_out_cgm (), new ac_stand_up () ).set ( false );
         return NewScriptFromRoot(r);
     }
 }

@@ -54,5 +54,5 @@ namespace Triheroes.Code
         }
     }
 
-    public enum ForceType { diffuse, perce, slash, perce_parry, explosion, hard_surface }
+    public enum ForceType { diffuse, perce, slash, parry, explosion, hard_surface }
 }

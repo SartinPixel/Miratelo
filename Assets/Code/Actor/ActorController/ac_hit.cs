@@ -58,8 +58,7 @@ namespace Triheroes.Code
             PartADone = false;
             ms.PlayState (0, AnimationKey.hit_knocked_a, 0.1f);
 
-            mccc.velocityDir += ( ms.Coord.position - mh.LastAttack.impactPoint).normalized * mh.LastAttack.raw;
-            mccc.velocityDir += mh.LastAttack.raw * Vector3.up;
+            mccc.velocityDir += ( ms.Coord.position - mh.LastAttack.impactPoint).normalized * mh.LastAttack.raw + mh.LastAttack.raw * Vector3.up;
 
             mccc.Coord.transform.position += Vector3.up * 0.2f;
         }
@@ -85,6 +84,17 @@ namespace Triheroes.Code
         protected override void Stop()
         {
             mccc.Free (this);
+        }
+    }
+
+    public class ac_stand_up : action
+    {
+        [Depend]
+        m_skin ms;
+
+        protected override void BeginStep()
+        {
+            ms.PlayState (0, AnimationKey.stand_up, 0.1f, AppendStop);
         }
     }
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e4705de9d0da624e80b5d1b9693a252, type: 3}
-  m_Name: AniA
+  m_Name: AniTest
   m_EditorClassIdentifier: 
-  Model: {fileID: 9100000, guid: 9f7445ed5a9c182419b2bfd6d339fdb7, type: 2}
+  Model: {fileID: 9100000, guid: 2bd5efc1057f33a47aa5402d3e0f9fce, type: 2}
   SerializedStates:
   - Key:
       value: -601574123
@@ -47,21 +47,21 @@ MonoBehaviour:
   - Key:
       value: -1086562103
       keyName: slash_0
-    Duration: 0.4666667
+    Duration: 0.9333334
     EvPoint:
-    - 0.1957522
+    - 0.3915044
   - Key:
       value: -935636897
       keyName: slash_1
-    Duration: 0.40000004
+    Duration: 0.8000001
     EvPoint:
-    - 0.23689537
+    - 0.47379074
   - Key:
       value: 1362231781
       keyName: slash_2
-    Duration: 0.5
+    Duration: 1
     EvPoint:
-    - 0.21751988
+    - 0.43503976
   - Key:
       value: -1194472396
       keyName: jump_right_foot
@@ -120,17 +120,17 @@ MonoBehaviour:
   - Key:
       value: -950723988
       keyName: parry_1
-    Duration: 0.5
+    Duration: 0.6666667
     EvPoint:
-    - 0.08280518
-    - 0.28985506
+    - 0.110406905
+    - 0.38647342
   - Key:
       value: 1583107030
       keyName: parry_2
-    Duration: 0.5
+    Duration: 0.6666667
     EvPoint:
-    - 0.054541413
-    - 0.3164251
+    - 0.07272188
+    - 0.42190015
   - Key:
       value: 599360491
       keyName: idle_tired

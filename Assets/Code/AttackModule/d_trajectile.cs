@@ -46,7 +46,7 @@ namespace Triheroes.Code
 
         void Parry ( Force force )
         {
-            if (on && force.type == ForceType.perce_parry )
+            if (on && force.type == ForceType.parry )
             rotation = Vecteur.RotDirectionQuaternion (Vector3.zero,force.Normal);
         }
 

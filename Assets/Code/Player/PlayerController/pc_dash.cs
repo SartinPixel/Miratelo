@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pixify;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Triheroes.Code
 {
@@ -11,6 +12,8 @@ namespace Triheroes.Code
         pm_master_controller pmc;
         [Depend]
         m_actor ma;
+        [Depend]
+        m_skin ms;
 
         ac_dash ad;
         public override void Create()
@@ -28,6 +31,7 @@ namespace Triheroes.Code
                 {
                     Vector3 InputAxis;
                     InputAxis = Player.GetAxis3().normalized;
+                    InputAxis = Vecteur.LDir ( Mathf.DeltaAngle ( ms.rotY.y, m_camera.o.mcts.rotY.y ) * Vector3.up, InputAxis );
 
                     if (Mathf.Abs(InputAxis.x) > Mathf.Abs(InputAxis.z))
                     {
@@ -41,6 +45,19 @@ namespace Triheroes.Code
                 }
 
                 pmc.OverrideMaster ( this, ad );
+                return false;
+            }
+
+            if ( ad.on )
+            {
+                if (ma.target != null)
+                {
+                if ( Mathf.Abs (Mathf.DeltaAngle ( ms.rotY.y ,Vecteur.RotDirectionY ( ms.Coord.position, ma.target.md.position ))) < 90 )
+                ms.rotY = new Vector3(0, Mathf.MoveTowardsAngle(ms.rotY.y, Vecteur.RotDirectionY ( ms.Coord.position, ma.target.md.position ), Time.deltaTime * 720), 0);
+                ms.SkinDir = Vecteur.LDir ( ms.rotY , ac_dash.Direction (ad.dashDirection));
+                }
+                if (Player.GetButtonUp ( BoutonId.Fire2 ))
+                ad.DashEnd ();
             }
             return false;
         }

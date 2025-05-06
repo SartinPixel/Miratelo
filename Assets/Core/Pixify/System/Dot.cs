@@ -103,7 +103,7 @@ namespace Pixify
             DotV.Free ( poolA [index] );
         }
 
-        public new void SelfFree ()
+        protected new void SelfFree ()
         {
             Debug.LogError ("Self free on a vDot is a bad idea, as it will escape from the pool");
         }

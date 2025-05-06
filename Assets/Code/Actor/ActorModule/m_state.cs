@@ -108,7 +108,7 @@ namespace Triheroes.Code
 
     public class state_switcher : neuro
     {
-
+        public bool reset = true;
         action root;
         public action nextState;
         public state_switcher(params action[] o)
@@ -118,8 +118,16 @@ namespace Triheroes.Code
             nextState = root;
         }
 
+        public state_switcher set (bool reset = true)
+        {
+            this.reset = reset;
+            return this;
+        }
+
         protected sealed override void BeginStep()
         {
+            if (reset)
+            root = o [0];
             root.iStart();
         }
 

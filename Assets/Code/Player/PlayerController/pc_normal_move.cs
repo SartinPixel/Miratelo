@@ -29,7 +29,7 @@ namespace Triheroes.Code
             InputAxis = Player.GetAxis3();
 
             mscch.cgm.tired = (msea.energy == 0);
-            InputAxis = Vecteur.LDir(new Vector3(0, m_camera.o.mcts.rotY.y, 0), InputAxis) * 6f;
+            InputAxis = Vecteur.LDir(new Vector3(0, m_camera.o.mcts.rotY.y, 0), InputAxis) * 8f;
 
             UIDebug.PushText ( msh.HP.ToString () );
 

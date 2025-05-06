@@ -27,6 +27,7 @@ namespace Triheroes.Code
 		void Awake()
 		{
 			Cursor.lockState = CursorLockMode.Locked;
+			Application.targetFrameRate = 90;
 			o = this;
 
 			TempLayer = LayerMask.GetMask("temp");

@@ -42,6 +42,7 @@ namespace Triheroes.Code
         public static readonly SuperKey jump_left_foot = new SuperKey("jump_left_foot");
         public static readonly SuperKey jump_right_foot = new SuperKey("jump_right_foot");
 
+        public static readonly SuperKey stand_up = new SuperKey ("stand_up");
         public static readonly SuperKey hit = new SuperKey("hit");
         public static readonly SuperKey hitu = new SuperKey ("hitu");
         public static readonly SuperKey hit_knocked_a = new SuperKey ("hit_knocked_a");

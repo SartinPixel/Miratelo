@@ -23,7 +23,7 @@ namespace Triheroes.Code
         {
             Vector3 InputAxis;
             InputAxis = Player.GetAxis3();
-            InputAxis = Vecteur.LDir (new Vector3(0, m_camera.o.mcts.rotY.y, 0),InputAxis) * 6f;
+            InputAxis = Vecteur.LDir ( m_camera.o.mcts.rotY.OnlyY (),InputAxis) * 6f;
 
             if (mgd.onGround)
             mscch.cgm.WalkLateral ( InputAxis );

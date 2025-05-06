@@ -17,10 +17,18 @@ namespace Triheroes.Code
             gameObject.AddComponent <Vecteur> ();
             Reaction.LoadSpectres ();
 
+            // scene hardcoded index module
+            m_reaction_receiver.InitIndex ();
+            m_attack_receiver.InitIndex ();
+            m_trajectile_alert.InitIndex ();
+            m_slash_alert.InitIndex ();
+            d_slash_attack.InitIndex ();
+
             // scene hardcoded pool
             d_explosion.InitPool (32);
             d_trajectile.InitPool (32);
             d_slash_attack.InitPool (32);
+            d_parry_attack.InitPool (5);
 
             TrajectileAddon.InitPools ();
 
@@ -28,12 +36,6 @@ namespace Triheroes.Code
 
             // scene hardcoded object
              sp_slash = Loader.LoadIntoScene <SpectreAbs> ( "sp/sp_slash" );
-
-            // scene hardcoded index module
-            m_reaction_receiver.InitIndex ();
-            m_attack_receiver.InitIndex ();
-            m_trajectile_alert.InitIndex ();
-            m_slash_alert.InitIndex ();
 
             Systems = new List<CoreSystemBase>()
             {
@@ -53,6 +55,7 @@ namespace Triheroes.Code
                 // attacks
                 new d_slash_attack.s_slash_attack (),
                 new d_trajectile.s_trajectile (),
+                new d_parry_attack.s_parry_attack (),
                 
                 // actor stat
                 new s_state_auto (),

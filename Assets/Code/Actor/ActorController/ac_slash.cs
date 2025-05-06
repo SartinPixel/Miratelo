@@ -133,7 +133,7 @@ namespace Triheroes.Code
             {
                 if ( Vector3.Distance ( trajectile.position, msu.Weapon.transform.position ) < ( msu.Weapon.Lenght + ( trajectile.speed * Time.deltaTime ) ) && Mathf.Abs ( Mathf.DeltaAngle ( Vecteur.RotDirectionY ( ms.Coord.position, trajectile.position ), ms.rotY.y ) ) < 90 )
                 {
-                Reaction.Clash ( msu.Weapon.mrr , trajectile.mrr, new Force (ForceType.perce_parry,0,trajectile.position,Vecteur.LDir ( ms.rotY, Vector3.forward )) );
+                Reaction.Clash ( msu.Weapon.mrr , trajectile.mrr, new Force (ForceType.parry,0,trajectile.position,Vecteur.LDir ( ms.rotY, Vector3.forward )) );
                 trajectile = null;
                 }
             }
@@ -154,7 +154,9 @@ namespace Triheroes.Code
         [Depend]
         m_skin ms;
 
+        bool ParryActived;
         SuperKey parryKey;
+        d_parry_attack ParryAttack;
 
         public void Set ( SuperKey parryKey )
         {
@@ -177,14 +179,36 @@ namespace Triheroes.Code
 
         void Begin ()
         {
-            ms.PlayState ( 0, parryKey, 0.1f, AppendStop );
+            ms.PlayState ( 0, parryKey, 0.1f, AppendStop, null, ActiveParry, StopParry );
             msu.state = StateKey.parry;
+            ParryActived = false;
+        }
+
+        void ActiveParry ()
+        {
+            ParryActived = true;
+            ParryAttack = d_parry_attack.Fire ( msu.Weapon );
+        }
+
+        void StopParry()
+        {
+            if (ParryActived)
+            {
+            d_parry_attack.DeFire ( ParryAttack );
+            ParryActived = false;
+            }
         }
 
         protected override void Stop()
         {
             if ( msu.state == StateKey.parry )
             msu.state = StateKey.zero;
+
+            if (ParryActived)
+            {
+            d_parry_attack.DeFire ( ParryAttack );
+            ParryActived = false;
+            }
         }
     }
 }

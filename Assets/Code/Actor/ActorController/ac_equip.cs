@@ -30,6 +30,25 @@ namespace Triheroes.Code
         }
     }
 
+    public class ac_return_weapon : action
+    {
+        
+        [Depend]
+        m_equip me;
+
+        protected override void BeginStep()
+        {
+            me.ReturnWeapon ( );
+        }
+
+        protected override bool Step()
+        {
+            if ( me.weaponUser == null )
+            return true;
+            return false;
+        }
+    }
+
     public class ac_has_active_weapon : condition
     {
         [Depend]

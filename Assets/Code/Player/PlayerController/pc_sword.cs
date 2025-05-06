@@ -56,6 +56,11 @@ namespace Triheroes.Code
                     else
                     trajectileParry ();
                 }
+
+                else {  
+                asp.Set(m_sword_user.ParryKeys[0]);
+                pmc.OverrideMaster(this, asp);
+                }
             }
             return false;
         }

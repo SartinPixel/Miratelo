@@ -46,7 +46,7 @@ public class scr_player_controller : ScriptInit
                 new pc_active_master_controller(),
                 new parallel (
                     new guard ( IF ( new ac_have_target () ),
-                                DO ( new parallel ( pc_lateral_move, new ac_look_at_target() ) ) ),
+                                DO ( new parallel ( pc_lateral_move, new ac_lock_target() ) ) ),
                     new guard ( IF ( NOT (new ac_have_target ()) ),
                                 DO ( pc_normal_move ) )
                 ),

@@ -8,7 +8,7 @@ namespace Triheroes.Code
     {
         public override void Clash(Force force, reactable from)
         {
-            if ( force.type == ForceType.perce_parry )
+            if ( force.type == ForceType.parry )
             {
                 Reaction.sp_impact.Emit ( force.impactPoint );
                 Parry?.Invoke ( force );

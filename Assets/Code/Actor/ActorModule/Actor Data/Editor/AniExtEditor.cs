@@ -66,7 +66,7 @@ namespace Triheroes.Code
 
                     for (int i = 0; i < c.events.Length; i++)
                     {
-                        ef[i] = c.events[i].time;
+                        ef[i] = c.events[i].time / s.state.speed;
                     }
 
                     States.Add(new SuperKey(s.state.name),

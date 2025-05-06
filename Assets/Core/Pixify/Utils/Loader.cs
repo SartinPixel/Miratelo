@@ -12,8 +12,6 @@ namespace Pixify
 
     public static class Loader
     {
-        public enum Comparator { less, more, equal, lessEqual, moreEqual }
-        
         public static T CopyWithExport <T> ( T a )
         {
             T b = (T) Activator.CreateInstance (a.GetType());
@@ -56,4 +54,6 @@ namespace Pixify
             return false;
         }
     }
+    
+    public enum Comparator { less, more, equal, lessEqual, moreEqual }
 }

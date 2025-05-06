@@ -75,6 +75,10 @@ namespace Pixify
 
         public guard ( condition[] c, action[] o ) : base ( c,o ) {}
 
+        protected override void BeginStep()
+        {
+            HasStarted = false;
+        }
         protected override bool Step()
         {
             bool MeetCondition = ConditionGate();
@@ -109,5 +113,64 @@ namespace Pixify
                 if (n.on)
                     n.iAbort();
         }
+    }
+
+    public class xcondition : condition_neuro
+    {
+        // pass the condition if cannot run
+        public bool Pass;
+
+        bool HasStarted;
+        public enum mode {CheckAlways, CheckOnce}
+        public mode Mode;
+
+        public xcondition Set ( bool Pass, mode Mode )
+        {
+            this.Pass = Pass;
+            this.Mode = Mode;
+            return this;
+        }
+
+        public xcondition ( condition[] c, action o ) : base ( c,new action[] {o} ) {}
+
+        protected override void BeginStep()
+        {
+            HasStarted = false;
+        }
+
+        protected override bool Step()
+        {
+            bool MeetCondition = ConditionGate ();
+
+            if ( !MeetCondition && Pass )
+            return true;
+
+            if ( MeetCondition )
+            {
+                if ( HasStarted )
+                {
+                    o[0].iExecute ();
+                    if (!o[0].on)
+                    return true;
+                }
+                else
+                {
+                    o[0].iStart ();
+                    HasStarted = true;
+                }
+            }
+
+            if ( Mode == mode.CheckAlways && !MeetCondition && HasStarted )
+                return true;
+
+            return false;
+        }
+
+        protected override void Stop()
+        {
+            if (o[0].on)
+            o[0].iAbort ();
+        }
+
     }
 }
